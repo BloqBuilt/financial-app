@@ -1,0 +1,37 @@
+<ui-page-header>
+  Cash Flow
+</ui-page-header>
+<div class="pa4">
+  <ui-card>
+    <div>Cash Flow Breakdown</div>
+    <div class="flex flex-column ph2">
+      <div class="flex pv2 items-center">
+        <div class="b w-30">Income</div>
+        <div>{{cashFlowIncome$ | async}}</div>
+      </div>
+      <div class="flex pv2 items-center">
+        <div class="b w-30">Expense</div>
+        <div>{{cashFlowExpense$ | async}}</div>
+      </div>
+      <div class="flex pv2 items-center">
+        <div class="b w-30">Net Cash Flow</div>
+        <div>{{netCashFlow$ | async}}</div>
+      </div>
+    </div>
+  </ui-card>
+  <ui-card>
+    <div>
+      Cash Flow List
+    </div>
+    <ui-table-row-header [tableHeaders]="tableHeaders"
+      (addItem)="handleAddItem()"></ui-table-row-header>
+    <ui-table-row class="w-100 flex"
+      *ngFor="let listItem of (cashFlowList$ | async); let even = even; let i = index; trackBy: trackByIndex;"
+      (deleteItem)="deleteItem(i)"
+      [ngClass]="{ 'bg-lightest-blue' : even }">
+      <app-cash-flow-entry class="flex pv2 items-center"
+        [formState]="listItem">
+      </app-cash-flow-entry>
+    </ui-table-row>
+  </ui-card>
+</div>

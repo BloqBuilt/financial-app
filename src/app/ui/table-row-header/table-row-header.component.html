@@ -1,0 +1,16 @@
+<div class="flex ph2 pv3 items-center bb bw2 b--dark-blue">
+  <div class="flex flex-1 items-center">
+    <div class="dt table-fixed w-100">
+      <div *ngFor="let label of tableHeaders"
+        class="dtc mh3 ph2">
+        <div class="flex flex-1 f4 dark-blue">{{label}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="flex pr3">
+    <div class="action-icon">
+      <i class="material-icons grow-large br-pill ba bw1 pa1 pointer dark-green hover-green no-select"
+        (click)="addItem.emit()">add</i>
+    </div>
+  </div>
+</div>

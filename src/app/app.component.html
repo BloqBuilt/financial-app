@@ -1,0 +1,33 @@
+<div class="sans-serif flex flex-column">
+  <div class="flex items-center w-100 bg-white white f3 shadow-1 z-5">
+    <div class="flex flex-row side-bar-icon dark-blue items-center justify-center hover-bg-dark-blue hover-white pointer"
+      (click)="onMenuToggle()">
+      <i class="material-icons">menu</i>
+    </div>
+    <div class="dark-blue pl3">
+      Financial App
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <div class="transition"
+      [ngClass]="isMenuToggled ? 'side-bar-open' : 'side-bar-closed'">
+      <div class="flex flex-column h-100 bg-dark-blue overflow-hidden">
+        <div *ngFor="let menuItem of menuList"
+          class="flex flex-row items-center bb br b--dark-gray white hover-bg-white hover-dark-blue pointer outline-0"
+          routerLink="{{menuItem.url}}"
+          routerLinkActive="bg-white dark-blue">
+          <div class="flex flex-row side-bar-icon items-center justify-center">
+            <i class="material-icons">{{menuItem.icon}}</i>
+          </div>
+          <div class="no-wrap no-select pointer"
+            *ngIf="isMenuToggled">
+            {{menuItem.label}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-auto bg-near-white">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

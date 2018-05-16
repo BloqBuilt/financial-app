@@ -1,0 +1,19 @@
+<ui-page-header>
+  Liabilities
+</ui-page-header>
+<div class="pa4">
+  <app-liability-summary></app-liability-summary>
+  <ui-card>
+    <div>Liability List</div>
+    <ui-table-row-header [tableHeaders]="tableHeaders"
+      (addItem)="addItem()"></ui-table-row-header>
+    <ui-table-row class="w-100 flex"
+      *ngFor="let listItem of (liabilityList$ | async); let even = even; let i = index; trackBy: trackByIndex;"
+      (deleteItem)="deleteItem(i)"
+      [ngClass]="{ 'bg-lightest-blue' : even }">
+      <app-liability-entry class="flex pv2 items-center"
+        [formState]="listItem">
+      </app-liability-entry>
+    </ui-table-row>
+  </ui-card>
+</div>

@@ -1,0 +1,44 @@
+<ui-page-header>
+  My Profile
+</ui-page-header>
+<div class="pa4">
+  <ui-card>
+    <div class="flex pa2">
+      <div class="flex flex-column ph2 w-50">
+        <mat-form-field>
+          <input matInput
+            placeholder="Name"
+            [ngrxFormControlState]="(profileControls$ | async).name">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+            placeholder="Age"
+            type="number"
+            [ngrxFormControlState]="(profileControls$ | async).age">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+            placeholder="Retirement Age Goal"
+            type="number"
+            [ngrxFormControlState]="(profileControls$ | async).retirementAge">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput
+            placeholder="Life Expectancy"
+            type="number"
+            [ngrxFormControlState]="(profileControls$ | async).lifeExpectancy">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-column ph2 w-50">
+        <div class="flex items-center pv2">
+          <div class="w-40">Years till Retirement</div>
+          <div>{{ yearToRetire$ | async }}</div>
+        </div>
+        <div class="flex items-center pv2">
+          <div class="w-40">Years in Retirement</div>
+          <div>{{ yearInRetirement$ | async }}</div>
+        </div>
+      </div>
+    </div>
+  </ui-card>
+</div>

@@ -1,0 +1,32 @@
+<div class="dt table-fixed w-100">
+  <div class="dtc mh3 ph2">
+    <mat-form-field>
+      <input matInput
+        [ngrxFormControlState]="formState.controls.name">
+    </mat-form-field>
+  </div>
+  <div class="dtc mh3 ph2">
+    <mat-form-field class="flex">
+      <input matInput
+        type="number"
+        [ngrxFormControlState]="formState.controls.amount">
+    </mat-form-field>
+  </div>
+  <div class="dtc mh3 ph2">
+    <mat-form-field class="flex">
+      <input matInput
+        type="number"
+        [ngrxFormControlState]="formState.controls.minimumPayment">
+    </mat-form-field>
+  </div>
+  <div class="dtc mh3 ph2">
+    <mat-form-field class="flex">
+      <mat-select [ngrxFormControlState]="formState.controls.financialType">
+        <mat-option *ngFor="let optionItem of optionList"
+          [value]="optionItem.value">
+          {{ optionItem.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
