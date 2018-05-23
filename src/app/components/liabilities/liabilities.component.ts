@@ -3,7 +3,7 @@ import { ILiabilityItem, LiabilityItem } from '../../models/liability-item';
 import { Store, ActionsSubject } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
-import { LiabilitySelectorService } from '../../store/selectors/liability-list.selector';
+import { LiabilitySelectorService } from '../../store/selectors/liability.selector';
 
 @Component({
   selector: 'app-liabilities',

@@ -2,7 +2,7 @@
   Assets
 </ui-page-header>
 <div class="pa4">
-  <ui-card>
+  <!-- <ui-card>
     <div>
       Your Total Asset
     </div>
@@ -19,19 +19,19 @@
         [chartDataSet]="chartDataSet"
         [chartLabels]="chartLabels"></ui-chart>
     </div>
-  </ui-card>
+  </ui-card> -->
   <ui-card>
     <div>
       Asset List
     </div>
     <ui-table-row-header [tableHeaders]="tableHeaders"
-      (addItem)="handleAssetAdd()"></ui-table-row-header>
+      (addItem)="assetAdd()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
-      *ngFor="let listItem of assetList; let even = even;"
-      (deleteItem)="handleAssetDelete($event)"
+      *ngFor="let listItem of (assetList$ | async); let even = even;"
+      (deleteItem)="deleteItem(i)"
       [ngClass]="{ 'bg-lightest-blue' : even }">
-      <app-asset-entry [data]="listItem"
-        (updateItem)="handleAssetUpdate($event)">
+      <app-asset-entry class="flex pv2 items-center"
+        [formState]="listItem">
       </app-asset-entry>
     </ui-table-row>
   </ui-card>

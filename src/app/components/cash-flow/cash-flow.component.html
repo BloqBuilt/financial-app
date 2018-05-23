@@ -24,7 +24,7 @@
       Cash Flow List
     </div>
     <ui-table-row-header [tableHeaders]="tableHeaders"
-      (addItem)="handleAddItem()"></ui-table-row-header>
+      (addItem)="addItem()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
       *ngFor="let listItem of (cashFlowList$ | async); let even = even; let i = index; trackBy: trackByIndex;"
       (deleteItem)="deleteItem(i)"

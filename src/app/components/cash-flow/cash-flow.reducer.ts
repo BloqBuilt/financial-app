@@ -58,10 +58,9 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
   ),
 });
 
-export function cashFlowReducer(_s: any, _a: any) {
-  return combineReducers<any, any>({
+export const cashFlowReducer = (_s: any, _a: any) =>
+  combineReducers<any, any>({
     formState(s = INITIAL_STATE, a: Action) {
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);
-}

@@ -19,14 +19,7 @@ export const metaReducers = [
 
 export function initializeStore() {
   return [
-    StoreModule.forRoot(
-      {
-        rootState: (s, a) => {
-          return null;
-        },
-      },
-      { metaReducers },
-    ),
+    StoreModule.forRoot({}, { metaReducers }),
     EffectsModule.forRoot([]),
     !environment.production
       ? StoreDevtoolsModule.instrument({

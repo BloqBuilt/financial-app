@@ -16,8 +16,9 @@ import { routes } from './app.router';
 // Services
 import { BaseHttpService } from './api/base-http/base-http.service';
 import { ProfileSelectorService } from './store/selectors/profile.selector';
+import { AssetSelectorService } from './store/selectors/asset.selector';
 import { CashFlowSelectorService } from './store/selectors/cash-flow.selector';
-import { LiabilitySelectorService } from './store/selectors/liability-list.selector';
+import { LiabilitySelectorService } from './store/selectors/liability.selector';
 
 // Components
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     BaseHttpService,
+    AssetSelectorService,
     ProfileSelectorService,
     CashFlowSelectorService,
     LiabilitySelectorService,

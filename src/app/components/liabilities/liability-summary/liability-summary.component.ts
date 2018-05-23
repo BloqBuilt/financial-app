@@ -4,7 +4,7 @@ import {
   LiabilityTypeEnum,
 } from '../../../models/liability-item';
 import { Observable } from 'rxjs/Observable';
-import { LiabilitySelectorService } from '../../../store/selectors/liability-list.selector';
+import { LiabilitySelectorService } from '../../../store/selectors/liability.selector';
 
 @Component({
   selector: 'app-liability-summary',
