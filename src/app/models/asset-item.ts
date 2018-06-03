@@ -16,9 +16,9 @@ export interface IAssetItem {
 
 export class AssetItem implements IAssetItem {
   constructor(
-    public name: string = '',
-    public amount: number = 0,
+    public name: string = null,
+    public amount: number = null,
     public financialType: AssetTypeEnum = null,
-    public id: number = undefined,
+    public id: number = null,
   ) {}
 }

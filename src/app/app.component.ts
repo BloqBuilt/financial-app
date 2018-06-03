@@ -5,6 +5,9 @@ import { Navigation, INavigation } from './models/navigation';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  host: {
+    class: 'h-100'
+  }
 })
 export class AppComponent {
   private isMenuToggled: boolean = false;

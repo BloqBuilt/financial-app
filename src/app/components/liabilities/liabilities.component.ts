@@ -4,13 +4,18 @@ import { Store, ActionsSubject } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { LiabilitySelectorService } from '../../store/selectors/liability.selector';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
   selector: 'app-liabilities',
   templateUrl: './liabilities.component.html',
   styleUrls: ['./liabilities.component.scss'],
+  host: {
+    class: 'flex flex-column',
+  },
 })
 export class LiabilitiesComponent {
+  summaryLabels: string[] = ['Credit Card', 'Loan', 'Mortage'];
   tableHeaders: string[] = [
     'Name',
     'Amount',
@@ -18,8 +23,14 @@ export class LiabilitiesComponent {
     'Liability Type',
   ];
 
-  private liabilityList$: Observable<ILiabilityItem[]> = this
-    .liabilitySelectorService.liabilitiesCollection$;
+  summaryValues$: Observable<Array<number>> = combineLatest(
+    this.liabilitySelectorService.liabilitiesCreditCardAmount$,
+    this.liabilitySelectorService.liabilitiesLoanAmount$,
+    this.liabilitySelectorService.liabilitiesMortageAmount$,
+  );
+
+  liabilityList$: Observable<ILiabilityItem[]> = this.liabilitySelectorService
+    .liabilitiesCollection$;
 
   constructor(
     private actionsSubject: ActionsSubject,

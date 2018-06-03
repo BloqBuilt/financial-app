@@ -10,6 +10,9 @@ import { Observable } from 'rxjs/Observable';
   selector: 'app-assets',
   templateUrl: './assets.component.html',
   styleUrls: ['./assets.component.scss'],
+  host: {
+    class: 'flex flex-column',
+  },
 })
 export class AssetsComponent {
   tableHeaders: string[] = ['Name', 'Amount', 'Asset Type'];

@@ -2,36 +2,34 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~tachyons/css/tachyons';
-// @import '~material-icons/css/material-icons.css';
-
 .no-wrap {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 .table-fixed {
-  table-layout: fixed;
+    table-layout: fixed;
 }
 
 .no-select {
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Safari */
-  -khtml-user-select: none;
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-  user-select: none;
-  /* Non-prefixed version, currently
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
 }
 
 .flex-1 {
-  flex: 1;
+    flex: 1;
 }
 
 .action-icon {
-  width: 40px;
+    width: 40px;
 }

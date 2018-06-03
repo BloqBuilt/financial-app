@@ -7,7 +7,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 // Effects
-
 export function logger(reducer: ActionReducer<{}>): any {
   return storeLogger({ collapsed: true })(reducer);
 }

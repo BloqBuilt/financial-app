@@ -1,7 +1,7 @@
 <ui-page-header>
   Assets
 </ui-page-header>
-<div class="pa4">
+<ui-page-scroll>
   <!-- <ui-card>
     <div>
       Your Total Asset
@@ -21,18 +21,17 @@
     </div>
   </ui-card> -->
   <ui-card>
-    <div>
+    <ui-card-header>
       Asset List
-    </div>
+    </ui-card-header>
     <ui-table-row-header [tableHeaders]="tableHeaders"
       (addItem)="assetAdd()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
       *ngFor="let listItem of (assetList$ | async); let even = even;"
-      (deleteItem)="deleteItem(i)"
-      [ngClass]="{ 'bg-lightest-blue' : even }">
-      <app-asset-entry class="flex pv2 items-center"
+      (deleteItem)="deleteItem(i)">
+      <app-asset-entry class="flex items-center"
         [formState]="listItem">
       </app-asset-entry>
     </ui-table-row>
   </ui-card>
-</div>
+</ui-page-scroll>

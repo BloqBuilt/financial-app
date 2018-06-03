@@ -13,10 +13,10 @@ export interface ICashFlowItem {
 
 export class CashFlowItem implements ICashFlowItem {
   constructor(
-    public id: number = undefined,
-    public name: string = undefined,
-    public amount: number = undefined,
-    public financialType: CashFlowTypeEnum = undefined,
-    public isMonthly: boolean = undefined,
+    public id: number = null,
+    public name: string = null,
+    public amount: number = null,
+    public financialType: CashFlowTypeEnum = null,
+    public isMonthly: boolean = null,
   ) {}
 }

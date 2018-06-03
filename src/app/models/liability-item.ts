@@ -16,11 +16,11 @@ export interface ILiabilityItem {
 
 export class LiabilityItem implements ILiabilityItem {
   constructor(
-    public id: number = undefined,
-    public name: string = undefined,
-    public amount: number = undefined,
-    public minimumPayment: number = undefined,
-    public financialType: LiabilityTypeEnum = undefined,
+    public id: number = null,
+    public name: string = null,
+    public amount: number = null,
+    public minimumPayment: number = null,
+    public financialType: LiabilityTypeEnum = null,
   ) {}
 }
 
