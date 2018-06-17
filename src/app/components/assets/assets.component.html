@@ -4,9 +4,8 @@
 <ui-page-scroll>
   <ui-summary [summaryLabels]="summaryLabels"
     [summaryValues]="summaryValues$ | async">
-    <ui-chart class="w-50"
-      [chartType]="'pie'"
-      [chartDataSet]="chartDataSet"
+    <ui-chart chartType="pie"
+      [chartData]="chartData$ | async"
       [chartLabels]="chartLabels"></ui-chart>
   </ui-summary>
   <ui-card>

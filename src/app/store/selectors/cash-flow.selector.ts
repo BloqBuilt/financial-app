@@ -46,9 +46,15 @@ export const expenseAmountSelector = aggregateCollection(isExpense);
 export const incomeAmountSelector = aggregateCollection(isIncome);
 
 export const totalCashFlow = createSelector(
-  expenseAmountSelector,
   incomeAmountSelector,
-  (expenseAmount, incomeAmount) => expenseAmount + incomeAmount,
+  expenseAmountSelector,
+  (incomeAmount, expenseAmount) => incomeAmount - expenseAmount,
+);
+
+const chartData = createSelector(
+  incomeAmountSelector,
+  expenseAmountSelector,
+  (incomeAmount, expenseAmount) => [incomeAmount, expenseAmount],
 );
 
 @Injectable()
@@ -60,4 +66,6 @@ export class CashFlowSelectorService {
   incomeAmount$: Observable<number> = this.store.select(incomeAmountSelector);
   expenseAmount$: Observable<number> = this.store.select(expenseAmountSelector);
   netCashFlow$: Observable<number> = this.store.select(totalCashFlow);
+
+  chartData$ = this.store.select(chartData);
 }

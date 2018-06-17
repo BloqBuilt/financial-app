@@ -1,8 +1,7 @@
-
 export interface INavigation {
-  icon: string,
-  label: string,
-  url: string
+  icon: string;
+  label: string;
+  url: string;
 }
 
 export class Navigation implements INavigation {

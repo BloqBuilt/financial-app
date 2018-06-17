@@ -63,29 +63,18 @@ export const totalAssetsSelector = createSelector(
     investmentAmount + realEstateAmount + rrspAmount + tfsaAmount,
 );
 
-// function getAssetTotalValue(
-//   assetList: IAssetItem[] = [],
-//   itemType: AssetTypeEnum,
-// ): number {
-//   let filteredAssetItems = assetList.filter(i => i.financialType === itemType);
-//   if (filteredAssetItems.length > 0) {
-//     let reduceAmmount = filteredAssetItems
-//       .map(i => i.amount)
-//       .reduce((a, b) => a + b);
-//     return reduceAmmount;
-//   } else {
-//     return 0;
-//   }
-// }
-
-// function transformAssetListIntoChartData(assetList: IAssetItem[] = []) {
-//   let newDataSet: Number[] = [];
-//   for (let itemType in AssetTypeEnum) {
-//     let amount = this.getAssetTotalValue(assetList, itemType as AssetTypeEnum);
-//     newDataSet.push(amount);
-//   }
-//   return [{ data: newDataSet }, { data: [] }, { data: [] }, { data: [] }];
-// }
+const assetChartDataSelector = createSelector(
+  InvestmentAmountSelector,
+  RealEstateAmountSelector,
+  RRSPAmountSelector,
+  TFSAAmountSelector,
+  (investmentAmount, realEstateAmount, rrspAmount, tfsaAmount) => [
+    investmentAmount || 0,
+    realEstateAmount || 0,
+    rrspAmount || 0,
+    tfsaAmount || 0,
+  ],
+);
 
 @Injectable()
 export class AssetSelectorService {
@@ -95,9 +84,11 @@ export class AssetSelectorService {
     AbstractControlState<IAssetItem[]>
   > = this.store.select(assetCollectionSelector);
 
-  assetInvestmentAmountSelector$ = this.store.select(InvestmentAmountSelector);
-  assetRealEstateAmountSelector$ = this.store.select(RealEstateAmountSelector);
-  assetRRSPAmountSelector$ = this.store.select(RRSPAmountSelector);
-  assetTFSAAmountSelector$ = this.store.select(TFSAAmountSelector);
-  totalAssetsAmountSelector$ = this.store.select(totalAssetsSelector);
+  investmentAmount$ = this.store.select(InvestmentAmountSelector);
+  realEstateAmount$ = this.store.select(RealEstateAmountSelector);
+  rrspAmount$ = this.store.select(RRSPAmountSelector);
+  tfsaAmount$ = this.store.select(TFSAAmountSelector);
+  totalAssetsAmount$ = this.store.select(totalAssetsSelector);
+
+  chartData$ = this.store.select(assetChartDataSelector);
 }

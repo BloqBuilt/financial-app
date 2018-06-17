@@ -7,11 +7,10 @@ import { StoreModule } from '@ngrx/store';
 import { NgrxFormsModule } from 'ngrx-forms';
 
 import { AssetsComponent } from './assets.component';
-import { AssetChartComponent } from './asset-chart/asset-chart.component';
 import { AssetEntryComponent } from './asset-entry/asset-entry.component';
 import { assetListReducer } from './assets.reducer';
 
-const components = [AssetsComponent, AssetChartComponent, AssetEntryComponent];
+const components = [AssetsComponent, AssetEntryComponent];
 
 @NgModule({
   imports: [

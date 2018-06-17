@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { IAssetItem, AssetItem } from '../../models/asset-item';
+import { IAssetItem, AssetItem, AssetTypeEnum } from '../../models/asset-item';
 import { IPieChartRow } from '../../models/chart';
 import { Store, ActionsSubject } from '@ngrx/store';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
@@ -16,27 +16,29 @@ export class AssetsComponent {
   @HostBinding('class') classes = 'flex flex-column';
 
   summaryLabels: string[] = [
-    'Real Estate',
-    'Investment',
-    'RRSP',
-    'TFSA',
+    AssetTypeEnum.Investment,
+    AssetTypeEnum.RealEstate,
+    AssetTypeEnum.RRSP,
+    AssetTypeEnum.TFSA,
     'Total Assets',
+  ];
+  chartLabels: AssetTypeEnum[] = [
+    AssetTypeEnum.Investment,
+    AssetTypeEnum.RealEstate,
+    AssetTypeEnum.RRSP,
+    AssetTypeEnum.TFSA,
   ];
   tableHeaders: string[] = ['Name', 'Amount', 'Asset Type'];
 
-  private assetList$ = this.assetSelectorService.assetCollection$;
-
+  assetList$ = this.assetSelectorService.assetCollection$;
+  chartData$ = this.assetSelectorService.chartData$;
   summaryValues$: Observable<number[]> = combineLatest(
-    this.assetSelectorService.assetRealEstateAmountSelector$,
-    this.assetSelectorService.assetInvestmentAmountSelector$,
-    this.assetSelectorService.assetRRSPAmountSelector$,
-    this.assetSelectorService.assetTFSAAmountSelector$,
-    this.assetSelectorService.totalAssetsAmountSelector$,
+    this.assetSelectorService.realEstateAmount$,
+    this.assetSelectorService.investmentAmount$,
+    this.assetSelectorService.rrspAmount$,
+    this.assetSelectorService.tfsaAmount$,
+    this.assetSelectorService.totalAssetsAmount$,
   );
-
-  private chartDataSet: IPieChartRow[];
-  private chartLabels;
-  private displayAssetList: any[] = [];
 
   constructor(
     private store: Store<any>,

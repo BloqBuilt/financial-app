@@ -65,6 +65,17 @@ export const liabilitiesTotalAmountSelector = createSelector(
     creditCardAmount + loanAmount + mortgageAmount,
 );
 
+const chartData = createSelector(
+  liabilitiesCreditCardAmountSelector,
+  liabilitiesLoanAmountSelector,
+  liabilitiesMortgageAmountSelector,
+  (creditCardAmount, loanAmount, mortgageAmount) => [
+    creditCardAmount,
+    loanAmount,
+    mortgageAmount,
+  ],
+);
+
 @Injectable()
 export class LiabilitySelectorService {
   constructor(private store: Store<any>) {}
@@ -88,4 +99,6 @@ export class LiabilitySelectorService {
   liabilitiesTotal$: Observable<number> = this.store.select(
     liabilitiesTotalAmountSelector,
   );
+
+  chartData$ = this.store.select(chartData);
 }
