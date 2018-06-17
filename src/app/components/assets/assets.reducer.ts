@@ -6,16 +6,21 @@ import {
   updateGroup,
   validate,
   createFormGroupState,
+  FormGroupState,
 } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 
-interface IAssetsStore {
+export interface IAssetsCollection {
   collection: IAssetItem[];
+}
+
+export interface IAssetsStore {
+  formState: FormGroupState<IAssetsCollection>;
 }
 
 export const FORM_ID = 'assets';
 
-export const INITIAL_STATE = createFormGroupState<IAssetsStore>(FORM_ID, {
+export const INITIAL_STATE = createFormGroupState<IAssetsCollection>(FORM_ID, {
   collection: [
     new AssetItem('Home', 30000, AssetTypeEnum.RealEstate, 1),
     new AssetItem('Stocks', 5000, AssetTypeEnum.Investment, 2),
@@ -25,7 +30,7 @@ export const INITIAL_STATE = createFormGroupState<IAssetsStore>(FORM_ID, {
 });
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
-  IAssetsStore
+  IAssetsCollection
 >({
   collection: updateArray<IAssetItem>(
     updateGroup<IAssetItem>({

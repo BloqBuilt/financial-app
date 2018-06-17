@@ -2,32 +2,18 @@
   Assets
 </ui-page-header>
 <ui-page-scroll>
-  <!-- <ui-card>
-    <div>
-      Your Total Asset
-    </div>
-    <div class="flex pa3">
-      <div class="w-50 flex flex-column">
-        <div class="flex pv2 items-center dark-blue f4"
-          *ngFor="let item of displayAssetList">
-          <div class="w-30">{{item.label}}</div>
-          <div>{{item.amount}}</div>
-        </div>
-      </div>
-      <ui-chart class="w-50"
-        [chartType]="'pie'"
-        [chartDataSet]="chartDataSet"
-        [chartLabels]="chartLabels"></ui-chart>
-    </div>
-  </ui-card> -->
+  <ui-summary [summaryLabels]="summaryLabels"
+    [summaryValues]="summaryValues$ | async">
+    <ui-chart class="w-50"
+      [chartType]="'pie'"
+      [chartDataSet]="chartDataSet"
+      [chartLabels]="chartLabels"></ui-chart>
+  </ui-summary>
   <ui-card>
-    <ui-card-header>
-      Asset List
-    </ui-card-header>
     <ui-table-row-header [tableHeaders]="tableHeaders"
       (addItem)="assetAdd()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
-      *ngFor="let listItem of (assetList$ | async); let even = even;"
+      *ngFor="let listItem of (assetList$ | async)?.controls; let even = even;"
       (deleteItem)="deleteItem(i)">
       <app-asset-entry class="flex items-center"
         [formState]="listItem">

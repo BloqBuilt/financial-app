@@ -9,15 +9,9 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { AssetsComponent } from './assets.component';
 import { AssetChartComponent } from './asset-chart/asset-chart.component';
 import { AssetEntryComponent } from './asset-entry/asset-entry.component';
-import { AssetSummaryComponent } from './asset-summary/asset-summary.component';
 import { assetListReducer } from './assets.reducer';
 
-const components = [
-  AssetsComponent,
-  AssetChartComponent,
-  AssetEntryComponent,
-  AssetSummaryComponent,
-];
+const components = [AssetsComponent, AssetChartComponent, AssetEntryComponent];
 
 @NgModule({
   imports: [

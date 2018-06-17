@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { ILiabilityItem, LiabilityItem } from '../../models/liability-item';
-import { Store, ActionsSubject } from '@ngrx/store';
+import { Store, ActionsSubject, MemoizedSelector } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { LiabilitySelectorService } from '../../store/selectors/liability.selector';
@@ -10,12 +10,11 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
   selector: 'app-liabilities',
   templateUrl: './liabilities.component.html',
   styleUrls: ['./liabilities.component.scss'],
-  host: {
-    class: 'flex flex-column',
-  },
 })
 export class LiabilitiesComponent {
-  summaryLabels: string[] = ['Credit Card', 'Loan', 'Mortage'];
+  @HostBinding('class') classes = 'flex flex-column';
+
+  summaryLabels: string[] = ['Credit Card', 'Loan', 'Mortage', 'Total Debt'];
   tableHeaders: string[] = [
     'Name',
     'Amount',
@@ -27,10 +26,10 @@ export class LiabilitiesComponent {
     this.liabilitySelectorService.liabilitiesCreditCardAmount$,
     this.liabilitySelectorService.liabilitiesLoanAmount$,
     this.liabilitySelectorService.liabilitiesMortageAmount$,
+    this.liabilitySelectorService.liabilitiesTotal$,
   );
 
-  liabilityList$: Observable<ILiabilityItem[]> = this.liabilitySelectorService
-    .liabilitiesCollection$;
+  liabilityList$ = this.liabilitySelectorService.liabilitiesCollection$;
 
   constructor(
     private actionsSubject: ActionsSubject,

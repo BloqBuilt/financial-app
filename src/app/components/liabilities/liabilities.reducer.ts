@@ -5,6 +5,7 @@ import {
   validate,
   updateArray,
   updateGroup,
+  FormGroupState,
 } from 'ngrx-forms';
 import { ILiabilityItem, LiabilityTypeEnum } from '../../models/liability-item';
 import { combineReducers, Action } from '@ngrx/store';
@@ -16,38 +17,45 @@ import {
 
 export const FORM_ID = 'liabilities';
 
-interface ILiabilityStore {
+interface ILiabilityCollection {
   collection: ILiabilityItem[];
 }
 
-export const INITIAL_STATE = createFormGroupState<ILiabilityStore>(FORM_ID, {
-  collection: [
-    {
-      id: 1,
-      name: 'CIBC',
-      amount: 300,
-      minimumPayment: 10,
-      financialType: LiabilityTypeEnum.CreditCard,
-    },
-    {
-      id: 2,
-      name: 'CIBC',
-      amount: 123,
-      minimumPayment: 20,
-      financialType: LiabilityTypeEnum.Loan,
-    },
-    {
-      id: 3,
-      name: 'CIBC',
-      amount: 123,
-      minimumPayment: 8,
-      financialType: LiabilityTypeEnum.Mortage,
-    },
-  ],
-});
+export interface ILiabilityState {
+  formState: FormGroupState<ILiabilityCollection>;
+}
+
+export const INITIAL_STATE = createFormGroupState<ILiabilityCollection>(
+  FORM_ID,
+  {
+    collection: [
+      {
+        id: 1,
+        name: 'CIBC',
+        amount: 300,
+        minimumPayment: 10,
+        financialType: LiabilityTypeEnum.CreditCard,
+      },
+      {
+        id: 2,
+        name: 'CIBC',
+        amount: 123,
+        minimumPayment: 20,
+        financialType: LiabilityTypeEnum.Loan,
+      },
+      {
+        id: 3,
+        name: 'CIBC',
+        amount: 123,
+        minimumPayment: 8,
+        financialType: LiabilityTypeEnum.Mortage,
+      },
+    ],
+  },
+);
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
-  ILiabilityStore
+  ILiabilityCollection
 >({
   collection: updateArray<ILiabilityItem>(
     updateGroup<ILiabilityItem>({
