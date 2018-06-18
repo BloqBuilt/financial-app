@@ -8,7 +8,10 @@ import {
   FormGroupState,
   FormArrayState,
 } from 'ngrx-forms';
-import { ILiabilityItem, LiabilityTypeEnum } from '../../models/liability-item';
+import {
+  ILiabilityItem,
+  LiabilityTypeEnum,
+} from '../../components/liabilities/liabilities.model';
 import { combineReducers, Action } from '@ngrx/store';
 import {
   required,
@@ -19,7 +22,7 @@ import {
 export const FORM_ID = 'liabilities';
 
 interface ILiabilityCollection {
-  collection: ILiabilityItem[];
+  collection: Array<ILiabilityItem>;
 }
 
 export interface ILiabilityState {
@@ -49,7 +52,7 @@ export const INITIAL_STATE = createFormGroupState<ILiabilityCollection>(
         name: 'CIBC',
         amount: 123,
         minimumPayment: 8,
-        financialType: LiabilityTypeEnum.Mortage,
+        financialType: LiabilityTypeEnum.Mortgage,
       },
     ],
   },

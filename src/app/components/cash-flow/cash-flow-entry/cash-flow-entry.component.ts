@@ -3,7 +3,7 @@ import { FormGroupState } from 'ngrx-forms';
 import {
   CashFlowTypeEnum,
   ICashFlowItem,
-} from '../../../models/cash-flow-item';
+} from '../../../components/cash-flow/cash-flow.model';
 
 @Component({
   selector: 'app-cash-flow-entry',

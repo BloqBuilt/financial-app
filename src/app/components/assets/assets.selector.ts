@@ -1,23 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { IAssetItem, AssetTypeEnum } from '../../models/asset-item';
 import {
-  IAssetsStore,
-  IAssetsCollection,
-} from '../../components/assets/assets.reducer';
-import { AbstractControlState } from 'ngrx-forms';
+  IAssetItem,
+  AssetTypeEnum,
+} from '../../components/assets/assets.model';
+import { IAssetsStore } from '../../components/assets/assets.reducer';
+import {
+  AbstractControlState,
+  FormArrayState,
+  FormGroupState,
+} from 'ngrx-forms';
 import {
   doesCollectionContainElements,
   getAmount,
   combine,
-} from './common.selector';
+} from '../../store/selectors/common.selector';
 
 export const assetsFeature = createFeatureSelector<IAssetsStore>('assets');
 
 export const assetCollectionSelector = createSelector(
   assetsFeature,
   assets => assets.formState.controls.collection,
+);
+
+export const assetsAutoSaveSelector = createSelector(
+  assetCollectionSelector,
+  collection =>
+    (collection as FormArrayState<IAssetItem>).controls.filter(
+      (item: FormGroupState<IAssetItem>) => !item.isPristine && item.isValid,
+    ),
 );
 
 export const assetValueCollectionSelector = createSelector(
@@ -77,12 +89,11 @@ const assetChartDataSelector = createSelector(
 );
 
 @Injectable()
-export class AssetSelectorService {
+export class AssetsSelectorService {
   constructor(private store: Store<any>) {}
 
-  collection$: Observable<
-    AbstractControlState<IAssetItem[]>
-  > = this.store.select(assetCollectionSelector);
+  collection$ = this.store.select(assetCollectionSelector);
+  collectionAutoSave$ = this.store.select(assetsAutoSaveSelector);
 
   investmentAmount$ = this.store.select(InvestmentAmountSelector);
   realEstateAmount$ = this.store.select(RealEstateAmountSelector);

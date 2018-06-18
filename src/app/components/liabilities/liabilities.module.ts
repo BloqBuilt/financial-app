@@ -9,8 +9,9 @@ import { LiabilitiesComponent } from './liabilities.component';
 import { LiabilityEntryComponent } from './liability-entry/liability-entry.component';
 import { reducer } from './liabilities.reducer';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { LiabilitiesAutoSaveService } from './liabilities.auto-save';
-import { LiabilitiesSelectorService } from './liabilities.selectors';
+import { LiabilitiesSelectorService } from './liabilities.selector';
+import { EffectsModule } from '@ngrx/effects';
+import { LiabilitiesEffect } from './liabilities.effect';
 
 const components = [LiabilitiesComponent, LiabilityEntryComponent];
 
@@ -22,8 +23,9 @@ const components = [LiabilitiesComponent, LiabilityEntryComponent];
     NgrxFormsModule,
     RouterModule.forChild([{ path: '', component: LiabilitiesComponent }]),
     StoreModule.forFeature('liabilities', reducer),
+    EffectsModule.forFeature([LiabilitiesEffect]),
   ],
-  providers: [LiabilitiesAutoSaveService, LiabilitiesSelectorService],
+  providers: [LiabilitiesSelectorService],
   declarations: components,
   exports: components,
 })

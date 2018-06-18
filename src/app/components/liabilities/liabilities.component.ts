@@ -3,13 +3,12 @@ import {
   ILiabilityItem,
   LiabilityItem,
   LiabilityTypeEnum,
-} from '../../models/liability-item';
-import { Store, ActionsSubject, MemoizedSelector } from '@ngrx/store';
+} from '../../components/liabilities/liabilities.model';
+import { ActionsSubject } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
-import { LiabilitiesSelectorService } from '../../components/liabilities/liabilities.selectors';
+import { LiabilitiesSelectorService } from '../../components/liabilities/liabilities.selector';
 import { combineLatest } from 'rxjs/observable/combineLatest';
-import { LiabilitiesAutoSaveService } from './liabilities.auto-save';
 
 @Component({
   selector: 'app-liabilities',
@@ -22,13 +21,13 @@ export class LiabilitiesComponent {
   summaryLabels: string[] = [
     LiabilityTypeEnum.CreditCard,
     LiabilityTypeEnum.Loan,
-    LiabilityTypeEnum.Mortage,
+    LiabilityTypeEnum.Mortgage,
     'Total Debt',
   ];
   chartLabels: LiabilityTypeEnum[] = [
     LiabilityTypeEnum.CreditCard,
     LiabilityTypeEnum.Loan,
-    LiabilityTypeEnum.Mortage,
+    LiabilityTypeEnum.Mortgage,
   ];
   tableHeaders: string[] = [
     'Name',
@@ -42,14 +41,13 @@ export class LiabilitiesComponent {
   summaryValues$: Observable<Array<number>> = combineLatest(
     this.liabilitiesSelector.creditCardAmount$,
     this.liabilitiesSelector.loanAmount$,
-    this.liabilitiesSelector.mortageAmount$,
+    this.liabilitiesSelector.mortgageAmount$,
     this.liabilitiesSelector.totalAmount$,
   );
 
   constructor(
     private actionsSubject: ActionsSubject,
     public liabilitiesSelector: LiabilitiesSelectorService,
-    private liabilitiesAutoSave: LiabilitiesAutoSaveService,
   ) {}
 
   trackByIndex(index: number) {

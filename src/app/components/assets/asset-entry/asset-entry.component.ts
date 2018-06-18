@@ -3,7 +3,7 @@ import {
   IAssetItem,
   AssetItem,
   AssetTypeEnum,
-} from '../../../models/asset-item';
+} from '../../../components/assets/assets.model';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 import { FormGroupState } from 'ngrx-forms';

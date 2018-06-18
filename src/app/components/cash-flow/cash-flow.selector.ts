@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store, createSelector, createFeatureSelector } from '@ngrx/store';
-import { map, filter, withLatestFrom, mergeMap } from 'rxjs/operators';
 import {
-  doesCollectionContainElements,
-  combine,
-  getAmount,
-} from './common.selector';
-import { ICashFlowItem, CashFlowTypeEnum } from '../../models/cash-flow-item';
+  ICashFlowItem,
+  CashFlowTypeEnum,
+} from '../../components/cash-flow/cash-flow.model';
 import { Observable } from 'rxjs/Observable';
 import { ICashFlowStore } from '../../components/cash-flow/cash-flow.reducer';
+import {
+  doesCollectionContainElements,
+  getAmount,
+  combine,
+} from '../../store/selectors/common.selector';
+import { FormArrayState, FormGroupState } from 'ngrx-forms';
 
 export const cashFlowFeatureSelector = createFeatureSelector<ICashFlowStore>(
   'cashFlow',
@@ -17,6 +20,14 @@ export const cashFlowFeatureSelector = createFeatureSelector<ICashFlowStore>(
 export const cashFlowCollectionSelector = createSelector(
   cashFlowFeatureSelector,
   cashFlow => cashFlow.formState.controls.collection,
+);
+
+export const cashFlowAutoSaveSelector = createSelector(
+  cashFlowCollectionSelector,
+  collection =>
+    (collection as FormArrayState<ICashFlowItem>).controls.filter(
+      (item: FormGroupState<ICashFlowItem>) => !item.isPristine && item.isValid,
+    ),
 );
 
 export const cashFlowValueCollectionSelector = createSelector(
@@ -62,6 +73,7 @@ export class CashFlowSelectorService {
   constructor(private store: Store<any>) {}
 
   collection$ = this.store.select(cashFlowCollectionSelector);
+  collectionAutoSave$ = this.store.select(cashFlowAutoSaveSelector);
 
   incomeAmount$: Observable<number> = this.store.select(incomeAmountSelector);
   expenseAmount$: Observable<number> = this.store.select(expenseAmountSelector);

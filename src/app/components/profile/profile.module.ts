@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProfileComponent } from './profile.component';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { profileReducer } from './profile.reducer';
+import { ProfileSelectorService } from './profile.selector';
 
 const components = [ProfileComponent];
 
@@ -19,6 +20,7 @@ const components = [ProfileComponent];
     RouterModule.forChild([{ path: '', component: ProfileComponent }]),
     StoreModule.forFeature('profile', profileReducer),
   ],
+  providers: [ProfileSelectorService],
   declarations: components,
   exports: components,
 })

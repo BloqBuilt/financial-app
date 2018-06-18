@@ -1,11 +1,15 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { IAssetItem, AssetItem, AssetTypeEnum } from '../../models/asset-item';
-import { IPieChartRow } from '../../models/chart';
+import {
+  IAssetItem,
+  AssetItem,
+  AssetTypeEnum,
+} from '../../components/assets/assets.model';
+import { IPieChartRow } from '../../ui/chart/chart.model';
 import { Store, ActionsSubject } from '@ngrx/store';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
-import { AssetSelectorService } from '../../store/selectors/asset.selector';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { AssetsSelectorService } from './assets.selector';
 
 @Component({
   selector: 'app-assets',
@@ -30,20 +34,19 @@ export class AssetsComponent {
   ];
   tableHeaders: string[] = ['Name', 'Amount', 'Asset Type'];
 
-  assetList$ = this.assetSelectorService.collection$;
-  chartData$ = this.assetSelectorService.chartData$;
+  assetList$ = this.assetsSelector.collection$;
+  chartData$ = this.assetsSelector.chartData$;
   summaryValues$: Observable<number[]> = combineLatest(
-    this.assetSelectorService.realEstateAmount$,
-    this.assetSelectorService.investmentAmount$,
-    this.assetSelectorService.rrspAmount$,
-    this.assetSelectorService.tfsaAmount$,
-    this.assetSelectorService.totalAssetsAmount$,
+    this.assetsSelector.realEstateAmount$,
+    this.assetsSelector.investmentAmount$,
+    this.assetsSelector.rrspAmount$,
+    this.assetsSelector.tfsaAmount$,
+    this.assetsSelector.totalAssetsAmount$,
   );
 
   constructor(
-    private store: Store<any>,
     private actionsSubject: ActionsSubject,
-    private assetSelectorService: AssetSelectorService,
+    private assetsSelector: AssetsSelectorService,
   ) {}
 
   trackByIndex(index: number) {

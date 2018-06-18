@@ -4,8 +4,8 @@ import {
   ICashFlowItem,
   CashFlowItem,
   CashFlowTypeEnum,
-} from '../../models/cash-flow-item';
-import { CashFlowSelectorService } from '../../store/selectors/cash-flow.selector';
+} from '../../components/cash-flow/cash-flow.model';
+import { CashFlowSelectorService } from '../../components/cash-flow/cash-flow.selector';
 import { Observable } from 'rxjs/Observable';
 import { RemoveArrayControlAction, AddArrayControlAction } from 'ngrx-forms';
 import { combineLatest } from 'rxjs/observable/combineLatest';
@@ -30,18 +30,17 @@ export class CashFlowComponent {
   chartColors: any[] = [{ backgroundColor: ['#19A974', '#FF4136'] }];
   tableHeaders: string[] = ['Name', 'Amount', 'Cash Flow Type'];
 
-  cashFlowList$ = this.cashFlowSelectorService.collection$;
-  chartData$ = this.cashFlowSelectorService.chartData$;
+  cashFlowList$ = this.cashFlowSelector.collection$;
+  chartData$ = this.cashFlowSelector.chartData$;
   summaryValues$: Observable<number[]> = combineLatest(
-    this.cashFlowSelectorService.incomeAmount$,
-    this.cashFlowSelectorService.expenseAmount$,
-    this.cashFlowSelectorService.netCashFlow$,
+    this.cashFlowSelector.incomeAmount$,
+    this.cashFlowSelector.expenseAmount$,
+    this.cashFlowSelector.netCashFlow$,
   );
 
   constructor(
-    private store: Store<any>,
     private actionsSubject: ActionsSubject,
-    private cashFlowSelectorService: CashFlowSelectorService,
+    private cashFlowSelector: CashFlowSelectorService,
   ) {}
 
   trackByIndex(index: number) {

@@ -6,10 +6,17 @@ import {
   MemoizedSelector,
   createSelector,
 } from '@ngrx/store';
-import { ILiabilityItem, LiabilityTypeEnum } from '../../models/liability-item';
+import {
+  ILiabilityItem,
+  LiabilityTypeEnum,
+} from '../../components/liabilities/liabilities.model';
 import { filter, map } from 'rxjs/operators';
 import { ILiabilityState } from '../../components/liabilities/liabilities.reducer';
-import { AbstractControlState } from 'ngrx-forms';
+import {
+  AbstractControlState,
+  FormArrayState,
+  FormGroupState,
+} from 'ngrx-forms';
 import {
   doesCollectionContainElements,
   getAmount,
@@ -22,14 +29,16 @@ export const liabilitiesFeatureSelector = createFeatureSelector<
 
 export const liabilitiesCollectionSelector = createSelector(
   liabilitiesFeatureSelector,
-  liabilities => liabilities.formState.controls,
+  liabilities => liabilities.formState.controls.collection,
 );
 
 export const liabilitiesAutoSaveSelector = createSelector(
   liabilitiesCollectionSelector,
-  collection => {
-    // return collection.filter(item => !item.isPristine && item.isValid);
-  },
+  collection =>
+    (collection as FormArrayState<ILiabilityItem>).controls.filter(
+      (item: FormGroupState<ILiabilityItem>) =>
+        !item.isPristine && item.isValid,
+    ),
 );
 
 export const liabilitiesValueCollectionSelector = createSelector(
@@ -43,8 +52,8 @@ export const isCreditCard = (item: ILiabilityItem) =>
 export const isLoan = (item: ILiabilityItem) =>
   item.financialType === LiabilityTypeEnum.Loan;
 
-export const isMortage = (item: ILiabilityItem) =>
-  item.financialType === LiabilityTypeEnum.Mortage;
+export const isMortgage = (item: ILiabilityItem) =>
+  item.financialType === LiabilityTypeEnum.Mortgage;
 
 export const aggregateCollection = (
   filterFunction: (item: ILiabilityItem) => boolean,
@@ -62,7 +71,9 @@ export const liabilitiesCreditCardAmountSelector = aggregateCollection(
   isCreditCard,
 );
 export const liabilitiesLoanAmountSelector = aggregateCollection(isLoan);
-export const liabilitiesMortgageAmountSelector = aggregateCollection(isMortage);
+export const liabilitiesMortgageAmountSelector = aggregateCollection(
+  isMortgage,
+);
 
 export const liabilitiesTotalAmountSelector = createSelector(
   liabilitiesCreditCardAmountSelector,
@@ -88,6 +99,7 @@ export class LiabilitiesSelectorService {
   constructor(private store: Store<any>) {}
 
   collection$ = this.store.select(liabilitiesCollectionSelector);
+  collectionAutoSave$ = this.store.select(liabilitiesAutoSaveSelector);
 
   creditCardAmount$: Observable<number> = this.store.select(
     liabilitiesCreditCardAmountSelector,
@@ -97,7 +109,7 @@ export class LiabilitiesSelectorService {
     liabilitiesLoanAmountSelector,
   );
 
-  mortageAmount$: Observable<number> = this.store.select(
+  mortgageAmount$: Observable<number> = this.store.select(
     liabilitiesMortgageAmountSelector,
   );
 

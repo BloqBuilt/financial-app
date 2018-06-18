@@ -1,9 +1,7 @@
-import { ISelectOption, SelectOption } from './select-option';
-
 export enum LiabilityTypeEnum {
   CreditCard = 'CreditCard',
   Loan = 'Loan',
-  Mortage = 'Mortage',
+  Mortgage = 'Mortgage',
 }
 
 export interface ILiabilityItem {
@@ -23,9 +21,3 @@ export class LiabilityItem implements ILiabilityItem {
     public financialType: LiabilityTypeEnum = null,
   ) {}
 }
-
-export const LiabilityOptionList: ISelectOption<LiabilityTypeEnum>[] = [
-  new SelectOption('Credit Card', LiabilityTypeEnum.CreditCard),
-  new SelectOption('Loan', LiabilityTypeEnum.Loan),
-  new SelectOption('Mortage', LiabilityTypeEnum.Mortage),
-];

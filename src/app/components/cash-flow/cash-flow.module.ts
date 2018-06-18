@@ -9,6 +9,9 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { CashFlowComponent } from './cash-flow.component';
 import { CashFlowEntryComponent } from './cash-flow-entry/cash-flow-entry.component';
 import { cashFlowReducer } from './cash-flow.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CashFlowEffect } from './cash-flow.effect';
+import { CashFlowSelectorService } from './cash-flow.selector';
 
 const components = [CashFlowComponent, CashFlowEntryComponent];
 
@@ -20,7 +23,9 @@ const components = [CashFlowComponent, CashFlowEntryComponent];
     MaterialModule,
     RouterModule.forChild([{ path: '', component: CashFlowComponent }]),
     StoreModule.forFeature('cashFlow', cashFlowReducer),
+    EffectsModule.forFeature([CashFlowEffect]),
   ],
+  providers: [CashFlowSelectorService],
   declarations: components,
   exports: components,
 })

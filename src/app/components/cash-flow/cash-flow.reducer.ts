@@ -13,7 +13,10 @@ import {
   greaterThan,
   greaterThanOrEqualTo,
 } from 'ngrx-forms/validation';
-import { ICashFlowItem, CashFlowTypeEnum } from '../../models/cash-flow-item';
+import {
+  ICashFlowItem,
+  CashFlowTypeEnum,
+} from '../../components/cash-flow/cash-flow.model';
 
 interface ICashFlowCollection {
   collection: ICashFlowItem[];

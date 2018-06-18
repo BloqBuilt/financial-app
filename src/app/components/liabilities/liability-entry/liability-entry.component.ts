@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import {
-  LiabilityItem,
   ILiabilityItem,
-  LiabilityOptionList,
-} from '../../../models/liability-item';
+  LiabilityTypeEnum,
+} from '../../../components/liabilities/liabilities.model';
 import { FormGroupState } from 'ngrx-forms';
 
 @Component({
@@ -13,5 +12,9 @@ import { FormGroupState } from 'ngrx-forms';
 })
 export class LiabilityEntryComponent {
   @Input() formState: FormGroupState<ILiabilityItem>;
-  private optionList = LiabilityOptionList;
+  private optionList: LiabilityTypeEnum[] = [
+    LiabilityTypeEnum.CreditCard,
+    LiabilityTypeEnum.Loan,
+    LiabilityTypeEnum.Mortgage,
+  ];
 }

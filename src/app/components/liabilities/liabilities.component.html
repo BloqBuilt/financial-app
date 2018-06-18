@@ -12,7 +12,7 @@
     <ui-table-row-header [tableHeaders]="tableHeaders"
       (addItem)="addItem()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
-      *ngFor="let listItem of (liabilityList$ | async); let first = first; let last = last; let i = index; trackBy: trackByIndex;"
+      *ngFor="let listItem of (liabilityList$ | async)?.controls; let first = first; let last = last; let i = index; trackBy: trackByIndex;"
       (deleteItem)="deleteItem(i)">
       <app-liability-entry class="flex items-center"
         [formState]="listItem">

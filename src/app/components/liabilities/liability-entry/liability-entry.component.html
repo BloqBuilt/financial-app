@@ -23,8 +23,8 @@
     <mat-form-field class="flex">
       <mat-select [ngrxFormControlState]="formState.controls.financialType">
         <mat-option *ngFor="let optionItem of optionList"
-          [value]="optionItem.value">
-          {{ optionItem.label }}
+          [value]="optionItem">
+          {{ optionItem }}
         </mat-option>
       </mat-select>
     </mat-form-field>

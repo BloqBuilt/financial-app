@@ -1,5 +1,3 @@
-import { SelectOption, ISelectOption } from './select-option';
-
 export enum AssetTypeEnum {
   RealEstate = 'Real Estate',
   Investment = 'Investment',

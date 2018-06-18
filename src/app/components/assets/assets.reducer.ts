@@ -1,4 +1,8 @@
-import { AssetItem, IAssetItem, AssetTypeEnum } from '../../models/asset-item';
+import {
+  AssetItem,
+  IAssetItem,
+  AssetTypeEnum,
+} from '../../components/assets/assets.model';
 import { combineReducers, Action } from '@ngrx/store';
 import {
   createFormGroupReducerWithUpdate,
@@ -11,7 +15,7 @@ import {
 import { required } from 'ngrx-forms/validation';
 
 export interface IAssetsCollection {
-  collection: IAssetItem[];
+  collection: Array<IAssetItem>;
 }
 
 export interface IAssetsStore {

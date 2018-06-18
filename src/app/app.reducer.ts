@@ -2,9 +2,9 @@ import { StoreModule } from '@ngrx/store';
 import { ActionReducer } from '@ngrx/store/src/models';
 import { storeLogger } from 'ngrx-store-logger';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { EffectsModule } from '@ngrx/effects/src/effects_module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 // Effects
 export function logger(reducer: ActionReducer<{}>): any {

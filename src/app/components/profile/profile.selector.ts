@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IProfile } from '../../components/profile/profile.reducer';
 import { map } from 'rxjs/operators';
 
 export const profileControlsSelector = store =>
