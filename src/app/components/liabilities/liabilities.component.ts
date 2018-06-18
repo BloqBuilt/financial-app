@@ -7,8 +7,9 @@ import {
 import { Store, ActionsSubject, MemoizedSelector } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
-import { LiabilitySelectorService } from '../../store/selectors/liability.selector';
+import { LiabilitiesSelectorService } from '../../components/liabilities/liabilities.selectors';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { LiabilitiesAutoSaveService } from './liabilities.auto-save';
 
 @Component({
   selector: 'app-liabilities',
@@ -36,18 +37,19 @@ export class LiabilitiesComponent {
     'Liability Type',
   ];
 
-  liabilityList$ = this.liabilitySelectorService.liabilitiesCollection$;
-  chartData$ = this.liabilitySelectorService.chartData$;
+  liabilityList$ = this.liabilitiesSelector.collection$;
+  chartData$ = this.liabilitiesSelector.chartData$;
   summaryValues$: Observable<Array<number>> = combineLatest(
-    this.liabilitySelectorService.liabilitiesCreditCardAmount$,
-    this.liabilitySelectorService.liabilitiesLoanAmount$,
-    this.liabilitySelectorService.liabilitiesMortageAmount$,
-    this.liabilitySelectorService.liabilitiesTotal$,
+    this.liabilitiesSelector.creditCardAmount$,
+    this.liabilitiesSelector.loanAmount$,
+    this.liabilitiesSelector.mortageAmount$,
+    this.liabilitiesSelector.totalAmount$,
   );
 
   constructor(
     private actionsSubject: ActionsSubject,
-    public liabilitySelectorService: LiabilitySelectorService,
+    public liabilitiesSelector: LiabilitiesSelectorService,
+    private liabilitiesAutoSave: LiabilitiesAutoSaveService,
   ) {}
 
   trackByIndex(index: number) {

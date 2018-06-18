@@ -2,12 +2,14 @@
   <div class="bg-dark-blue white f4 pa3 bb b--white">
     Summary
   </div>
-  <div class="flex pa3">
-    <div class="flex flex-column ph2 w-50">
-      <div class="flex pv2 justify-between"
-        *ngFor="let summaryLabel of summaryLabels; let i = index;">
-        <div class="b">{{summaryLabel}}</div>
-        <div>{{summaryValues[i] | currency}}</div>
+  <div class="flex pa2 items-center">
+    <div class="w-50 pv4">
+      <div class="flex flex-column ph2">
+        <div class="flex pv2 justify-between"
+          *ngFor="let summaryLabel of summaryLabels; let i = index;">
+          <div class="b">{{summaryLabel}}</div>
+          <div>{{summaryValues[i] | currency}}</div>
+        </div>
       </div>
     </div>
     <div class="flex justify-center pv2 w-50">

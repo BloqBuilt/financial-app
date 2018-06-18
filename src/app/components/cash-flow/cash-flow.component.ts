@@ -27,9 +27,10 @@ export class CashFlowComponent {
     CashFlowTypeEnum.Income,
     CashFlowTypeEnum.Expense,
   ];
+  chartColors: any[] = [{ backgroundColor: ['#19A974', '#FF4136'] }];
   tableHeaders: string[] = ['Name', 'Amount', 'Cash Flow Type'];
 
-  cashFlowList$ = this.cashFlowSelectorService.cashFlowCollection$;
+  cashFlowList$ = this.cashFlowSelectorService.collection$;
   chartData$ = this.cashFlowSelectorService.chartData$;
   summaryValues$: Observable<number[]> = combineLatest(
     this.cashFlowSelectorService.incomeAmount$,

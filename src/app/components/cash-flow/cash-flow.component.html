@@ -6,7 +6,8 @@
     [summaryValues]="summaryValues$ | async">
     <ui-chart chartType="pie"
       [chartData]="chartData$ | async"
-      [chartLabels]="chartLabels"></ui-chart>
+      [chartLabels]="chartLabels"
+      [chartColors]="chartColors"></ui-chart>
   </ui-summary>
   <ui-card>
     <ui-table-row-header [tableHeaders]="tableHeaders"

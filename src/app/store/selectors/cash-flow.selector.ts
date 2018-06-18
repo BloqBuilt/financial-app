@@ -61,7 +61,7 @@ const chartData = createSelector(
 export class CashFlowSelectorService {
   constructor(private store: Store<any>) {}
 
-  cashFlowCollection$ = this.store.select(cashFlowCollectionSelector);
+  collection$ = this.store.select(cashFlowCollectionSelector);
 
   incomeAmount$: Observable<number> = this.store.select(incomeAmountSelector);
   expenseAmount$: Observable<number> = this.store.select(expenseAmountSelector);

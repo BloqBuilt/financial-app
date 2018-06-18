@@ -80,7 +80,7 @@ const assetChartDataSelector = createSelector(
 export class AssetSelectorService {
   constructor(private store: Store<any>) {}
 
-  assetCollection$: Observable<
+  collection$: Observable<
     AbstractControlState<IAssetItem[]>
   > = this.store.select(assetCollectionSelector);
 

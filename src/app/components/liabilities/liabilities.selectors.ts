@@ -8,24 +8,31 @@ import {
 } from '@ngrx/store';
 import { ILiabilityItem, LiabilityTypeEnum } from '../../models/liability-item';
 import { filter, map } from 'rxjs/operators';
-import {
-  combine,
-  doesCollectionContainElements,
-  getAmount,
-} from './common.selector';
 import { ILiabilityState } from '../../components/liabilities/liabilities.reducer';
 import { AbstractControlState } from 'ngrx-forms';
+import {
+  doesCollectionContainElements,
+  getAmount,
+  combine,
+} from '../../store/selectors/common.selector';
 
 export const liabilitiesFeatureSelector = createFeatureSelector<
   ILiabilityState
 >('liabilities');
 
-export const liabilityCollectionSelector = createSelector(
+export const liabilitiesCollectionSelector = createSelector(
   liabilitiesFeatureSelector,
-  liabilities => liabilities.formState.controls.collection,
+  liabilities => liabilities.formState.controls,
 );
 
-export const liabilityValueCollectionSelector = createSelector(
+export const liabilitiesAutoSaveSelector = createSelector(
+  liabilitiesCollectionSelector,
+  collection => {
+    // return collection.filter(item => !item.isPristine && item.isValid);
+  },
+);
+
+export const liabilitiesValueCollectionSelector = createSelector(
   liabilitiesFeatureSelector,
   liabilities => liabilities.formState.value.collection,
 );
@@ -42,7 +49,7 @@ export const isMortage = (item: ILiabilityItem) =>
 export const aggregateCollection = (
   filterFunction: (item: ILiabilityItem) => boolean,
 ) =>
-  createSelector(liabilityValueCollectionSelector, collection => {
+  createSelector(liabilitiesValueCollectionSelector, collection => {
     if (doesCollectionContainElements(collection)) {
       return collection
         .filter(filterFunction)
@@ -77,26 +84,24 @@ const chartData = createSelector(
 );
 
 @Injectable()
-export class LiabilitySelectorService {
+export class LiabilitiesSelectorService {
   constructor(private store: Store<any>) {}
 
-  liabilitiesCollection$: Observable<
-    AbstractControlState<ILiabilityItem[]>
-  > = this.store.select(liabilityCollectionSelector);
+  collection$ = this.store.select(liabilitiesCollectionSelector);
 
-  liabilitiesCreditCardAmount$: Observable<number> = this.store.select(
+  creditCardAmount$: Observable<number> = this.store.select(
     liabilitiesCreditCardAmountSelector,
   );
 
-  liabilitiesLoanAmount$: Observable<number> = this.store.select(
+  loanAmount$: Observable<number> = this.store.select(
     liabilitiesLoanAmountSelector,
   );
 
-  liabilitiesMortageAmount$: Observable<number> = this.store.select(
+  mortageAmount$: Observable<number> = this.store.select(
     liabilitiesMortgageAmountSelector,
   );
 
-  liabilitiesTotal$: Observable<number> = this.store.select(
+  totalAmount$: Observable<number> = this.store.select(
     liabilitiesTotalAmountSelector,
   );
 

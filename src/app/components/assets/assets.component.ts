@@ -30,7 +30,7 @@ export class AssetsComponent {
   ];
   tableHeaders: string[] = ['Name', 'Amount', 'Asset Type'];
 
-  assetList$ = this.assetSelectorService.assetCollection$;
+  assetList$ = this.assetSelectorService.collection$;
   chartData$ = this.assetSelectorService.chartData$;
   summaryValues$: Observable<number[]> = combineLatest(
     this.assetSelectorService.realEstateAmount$,

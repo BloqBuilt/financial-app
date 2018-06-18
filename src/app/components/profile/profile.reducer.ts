@@ -18,16 +18,18 @@ export interface IProfile {
 }
 
 export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
-  name: null,
-  age: null,
-  retirementAge: null,
-  lifeExpectancy: null,
+  name: 'Roman',
+  age: 30,
+  retirementAge: 50,
+  lifeExpectancy: 90,
 });
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
   name: validate<string>(required),
-  age: (
-    age: AbstractControlState<number>,
+  age: validate<number>([required, greaterThan(0), lessThan(120)]),
+  retirementAge: validate<number>([required, greaterThan(0), lessThan(120)]),
+  lifeExpectancy: (
+    lifeExpectancy: AbstractControlState<number>,
     rootForm: FormGroupState<IProfile>,
   ) =>
     validate<number>(
@@ -35,33 +37,31 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
         required,
         greaterThan(0),
         lessThan(120),
-        maxAge(rootForm.controls.retirementAge.value || null),
+        minAge(rootForm.controls.retirementAge.value || null),
       ],
-      age,
+      lifeExpectancy,
     ),
-  retirementAge: (
-    retirementAge: AbstractControlState<number>,
-    rootForm: FormGroupState<IProfile>,
-  ) =>
-    validate<number>(
-      [
-        required,
-        greaterThan(0),
-        lessThan(120),
-        maxAge(rootForm.controls.lifeExpectancy.value || null),
-      ],
-      retirementAge,
-    ),
-  lifeExpectancy: validate<number>([required, greaterThan(0), lessThan(120)]),
 });
 
-export function maxAge(maxAge: number) {
+export function maxAge(maxAgeValue: number) {
   return (value: number) => {
-    return value <= maxAge
+    return value <= maxAgeValue
       ? null
       : {
           maxAge: {
             errorMessage: 'This is too big',
+          },
+        };
+  };
+}
+
+export function minAge(minAgeValue: number) {
+  return (value: number) => {
+    return value >= minAgeValue
+      ? null
+      : {
+          minAge: {
+            errorMessage: 'This is too small',
           },
         };
   };

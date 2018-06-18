@@ -9,6 +9,7 @@ export class ChartComponent implements OnInit {
   @Input() chartData: Array<number[]> | number[] = [];
   @Input() chartLabels: Array<any> = [];
   @Input() chartType = 'pie';
+  @Input() chartColors: Array<any>;
 
   constructor() {}
 
