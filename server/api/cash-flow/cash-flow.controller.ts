@@ -1,0 +1,31 @@
+import { CashFlowTypeEnum } from '../../../src/app/components/cash-flow/cash-flow.model';
+
+export class CashFlowExpressRouter {
+  static get(req, res) {
+    console.log('hit cash-flow');
+
+    res.send([
+      {
+        id: 1,
+        name: 'Hydro Bill',
+        amount: 120,
+        financialType: CashFlowTypeEnum.Expense,
+        isMonthly: true,
+      },
+      {
+        id: 2,
+        name: 'Mobile Bill',
+        amount: 60,
+        financialType: CashFlowTypeEnum.Expense,
+        isMonthly: true,
+      },
+      {
+        id: 3,
+        name: 'Income',
+        amount: 1000,
+        financialType: CashFlowTypeEnum.Income,
+        isMonthly: true,
+      },
+    ]);
+  }
+}

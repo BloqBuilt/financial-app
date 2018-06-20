@@ -7,15 +7,9 @@ import {
   FormGroupState,
 } from 'ngrx-forms';
 import { required, lessThan, greaterThan } from 'ngrx-forms/validation';
+import { IProfile } from './profile.model';
 
 const FORM_ID = 'profile';
-
-export interface IProfile {
-  name: string;
-  age: number;
-  retirementAge: number;
-  lifeExpectancy: number;
-}
 
 export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
   name: 'Roman',

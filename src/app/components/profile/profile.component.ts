@@ -1,8 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs/Observable';
-import { IProfile } from './profile.reducer';
 import { ProfileSelectorService } from './profile.selector';
+import { IProfile } from './profile.model';
 
 @Component({
   selector: 'app-profile',
