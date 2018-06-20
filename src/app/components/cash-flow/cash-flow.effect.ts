@@ -23,4 +23,18 @@ export class CashFlowEffect {
         // send data to API
       });
   }
+
+  // @Effect()
+  // saveAssets$: Observable<Action> = this.actions$
+  //   .ofType(SaveAssetHttpRequestAction.TYPE)
+  //   .pipe(
+  //     mergeMap((action: SaveAssetHttpRequestAction) =>
+  //       this.http.post('/assets/save', action.payload).pipe(
+  //         map((data: any) => new SaveAssetHttpResponseAction(data)),
+  //         // If successful, dispatch success action with result
+  //         // If request fails, dispatch failed action
+  //         catchError(() => of(new SaveAssetHttpErrorAction())),
+  //       ),
+  //     ),
+  //   );
 }
