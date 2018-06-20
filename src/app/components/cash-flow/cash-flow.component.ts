@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { Store, ActionsSubject } from '@ngrx/store';
+import { ActionsSubject } from '@ngrx/store';
 import {
   ICashFlowItem,
   CashFlowItem,

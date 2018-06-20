@@ -21,15 +21,15 @@ export const assetsFeature = createFeatureSelector<IAssetsStore>('assets');
 
 export const assetCollectionSelector = createSelector(
   assetsFeature,
-  assets => assets.formState.controls.collection,
+  assets => assets.formState.controls.collection as FormArrayState<IAssetItem>,
 );
 
 export const assetsAutoSaveSelector = createSelector(
   assetCollectionSelector,
   collection =>
-    (collection as FormArrayState<IAssetItem>).controls.filter(
-      (item: FormGroupState<IAssetItem>) => !item.isPristine && item.isValid,
-    ),
+    collection.controls
+      .filter(item => !item.isPristine && item.isValid)
+      .map(item => item.value),
 );
 
 export const assetValueCollectionSelector = createSelector(

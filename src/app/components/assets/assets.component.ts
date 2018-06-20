@@ -4,8 +4,7 @@ import {
   AssetItem,
   AssetTypeEnum,
 } from '../../components/assets/assets.model';
-import { IPieChartRow } from '../../ui/chart/chart.model';
-import { Store, ActionsSubject } from '@ngrx/store';
+import { ActionsSubject } from '@ngrx/store';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
