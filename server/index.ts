@@ -6,7 +6,9 @@ const port = process.env.PORT || 4000;
 
 initializeRoutes(app);
 
-const server = app.listen(() => {
+function runOnPort() {
   console.log('Server running on port:' + port);
   return port;
-});
+}
+
+const server = app.listen(runOnPort());
