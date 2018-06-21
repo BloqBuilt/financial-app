@@ -8,14 +8,15 @@ import {
 } from 'ngrx-forms';
 import { required, lessThan, greaterThan } from 'ngrx-forms/validation';
 import { IProfile } from './profile.model';
+import { GetProfileHttpReceiveAction } from './profile.action';
 
 const FORM_ID = 'profile';
 
 export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
-  name: 'Roman',
-  age: 30,
-  retirementAge: 50,
-  lifeExpectancy: 90,
+  name: null,
+  age: null,
+  retirementAge: null,
+  lifeExpectancy: null,
 });
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
@@ -63,7 +64,16 @@ export function minAge(minAgeValue: number) {
 
 export function profileReducer(_s: any, _a: any) {
   return combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: Action) {
+    formState(s = INITIAL_STATE, a: GetProfileHttpReceiveAction) {
+      switch (a.type) {
+        case GetProfileHttpReceiveAction.TYPE:
+          return createFormGroupState<IProfile>(FORM_ID, {
+            name: a.payload.name,
+            age: a.payload.age,
+            retirementAge: a.payload.retirementAge,
+            lifeExpectancy: a.payload.lifeExpectancy,
+          });
+      }
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);

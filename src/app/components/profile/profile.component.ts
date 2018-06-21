@@ -3,6 +3,8 @@ import { FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs/Observable';
 import { ProfileSelectorService } from './profile.selector';
 import { IProfile } from './profile.model';
+import { ActionsSubject } from '@ngrx/store';
+import { GetProfileHttpRequestAction } from './profile.action';
 
 @Component({
   selector: 'app-profile',
@@ -19,5 +21,10 @@ export class ProfileComponent {
   yearInRetirement$: Observable<number> = this.profileSelectorService
     .yearsInRetirement$;
 
-  constructor(public profileSelectorService: ProfileSelectorService) {}
+  constructor(
+    private actionsSubject: ActionsSubject,
+    public profileSelectorService: ProfileSelectorService,
+  ) {
+    actionsSubject.next(new GetProfileHttpRequestAction());
+  }
 }

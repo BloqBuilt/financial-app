@@ -16,4 +16,5 @@ export class SaveCashFlowHttpResponseAction implements Action {
 export class SaveCashFlowHttpErrorAction implements Action {
   static TYPE = 'http/save-cash-flow/error';
   readonly type = SaveCashFlowHttpErrorAction.TYPE;
+  constructor() {}
 }

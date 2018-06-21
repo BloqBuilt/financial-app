@@ -16,4 +16,5 @@ export class SaveAssetHttpResponseAction implements Action {
 export class SaveAssetHttpErrorAction implements Action {
   static TYPE = 'http/save-asset/error';
   readonly type = SaveAssetHttpErrorAction.TYPE;
+  constructor() {}
 }
