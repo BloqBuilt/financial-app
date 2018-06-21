@@ -26,10 +26,12 @@ export const liabilitiesCollectionSelector = createSelector(
 export const liabilitiesAutoSaveSelector = createSelector(
   liabilitiesCollectionSelector,
   collection =>
-    (collection as FormArrayState<ILiabilityItem>).controls.filter(
-      (item: FormGroupState<ILiabilityItem>) =>
-        !item.isPristine && item.isValid,
-    ),
+    (collection as FormArrayState<ILiabilityItem>).controls
+      .filter(
+        (item: FormGroupState<ILiabilityItem>) =>
+          !item.isPristine && item.isValid,
+      )
+      .map(item => item.value),
 );
 
 export const liabilitiesValueCollectionSelector = createSelector(

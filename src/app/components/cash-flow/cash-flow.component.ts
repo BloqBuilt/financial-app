@@ -9,6 +9,7 @@ import { CashFlowSelectorService } from '../../components/cash-flow/cash-flow.se
 import { Observable } from 'rxjs/Observable';
 import { RemoveArrayControlAction, AddArrayControlAction } from 'ngrx-forms';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { GetCashFlowHttpRequestAction } from './cash-flow.action';
 
 @Component({
   selector: 'app-cash-flow',
@@ -41,7 +42,9 @@ export class CashFlowComponent {
   constructor(
     private actionsSubject: ActionsSubject,
     private cashFlowSelector: CashFlowSelectorService,
-  ) {}
+  ) {
+    actionsSubject.next(new GetCashFlowHttpRequestAction());
+  }
 
   trackByIndex(index: number) {
     return index;

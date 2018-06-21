@@ -10,6 +10,7 @@ import { profileReducer } from './profile.reducer';
 import { ProfileSelectorService } from './profile.selector';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffect } from './profile.effect';
+import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 const components = [ProfileComponent];
 
@@ -23,7 +24,7 @@ const components = [ProfileComponent];
     StoreModule.forFeature('profile', profileReducer),
     EffectsModule.forFeature([ProfileEffect]),
   ],
-  providers: [ProfileSelectorService],
+  providers: [BaseHttpService, ProfileSelectorService],
   declarations: components,
   exports: components,
 })

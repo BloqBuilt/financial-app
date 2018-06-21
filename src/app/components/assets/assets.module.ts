@@ -12,6 +12,7 @@ import { assetListReducer } from './assets.reducer';
 import { AssetsSelectorService } from './assets.selector';
 import { EffectsModule } from '@ngrx/effects';
 import { AssetsEffect } from './assets.effect';
+import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 const components = [AssetsComponent, AssetEntryComponent];
 
@@ -25,7 +26,7 @@ const components = [AssetsComponent, AssetEntryComponent];
     StoreModule.forFeature('assets', assetListReducer),
     EffectsModule.forFeature([AssetsEffect]),
   ],
-  providers: [AssetsSelectorService],
+  providers: [BaseHttpService, AssetsSelectorService],
   declarations: components,
   exports: components,
 })

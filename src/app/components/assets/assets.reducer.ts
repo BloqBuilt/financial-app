@@ -13,6 +13,7 @@ import {
   FormGroupState,
 } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
+import { GetAssetsHttpResponseAction } from './assets.action';
 
 export interface IAssetsCollection {
   collection: Array<IAssetItem>;
@@ -25,12 +26,7 @@ export interface IAssetsStore {
 export const FORM_ID = 'assets';
 
 export const INITIAL_STATE = createFormGroupState<IAssetsCollection>(FORM_ID, {
-  collection: [
-    new AssetItem('Home', 30000, AssetTypeEnum.RealEstate, 1),
-    new AssetItem('Stocks', 5000, AssetTypeEnum.Investment, 2),
-    new AssetItem('Bitcoin', 5000, AssetTypeEnum.Investment, 3),
-    new AssetItem('RRSP Stocks', 2000, AssetTypeEnum.RRSP, 4),
-  ],
+  collection: [],
 });
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
@@ -47,7 +43,13 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
 
 export const assetListReducer = (_s: any, _a: any) =>
   combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: Action) {
+    formState(s = INITIAL_STATE, a: GetAssetsHttpResponseAction) {
+      switch (a.type) {
+        case GetAssetsHttpResponseAction.TYPE:
+          return createFormGroupState<IAssetsCollection>(FORM_ID, {
+            collection: a.payload,
+          });
+      }
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);

@@ -2,8 +2,7 @@ import { CashFlowTypeEnum } from '../../../src/app/components/cash-flow/cash-flo
 
 export class CashFlowExpressRouter {
   static get(req, res) {
-    console.log('hit cash-flow');
-
+    console.log('GET - Cash Flow');
     res.send([
       {
         id: 1,
@@ -27,5 +26,11 @@ export class CashFlowExpressRouter {
         isMonthly: true,
       },
     ]);
+  }
+
+  static post(req, res) {
+    console.log('POST - Cash Flow');
+    console.log(req.body);
+    res.send([]);
   }
 }

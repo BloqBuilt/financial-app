@@ -9,6 +9,7 @@ import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { AssetsSelectorService } from './assets.selector';
+import { GetAssetsHttpRequestAction } from './assets.action';
 
 @Component({
   selector: 'app-assets',
@@ -46,7 +47,9 @@ export class AssetsComponent {
   constructor(
     private actionsSubject: ActionsSubject,
     private assetsSelector: AssetsSelectorService,
-  ) {}
+  ) {
+    actionsSubject.next(new GetAssetsHttpRequestAction());
+  }
 
   trackByIndex(index: number) {
     return index;

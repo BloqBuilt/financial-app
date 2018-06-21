@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { LiabilitiesSelectorService } from '../../components/liabilities/liabilities.selector';
 import { combineLatest } from 'rxjs/observable/combineLatest';
+import { GetLiabilitiesHttpRequestAction } from './liabilities.action';
 
 @Component({
   selector: 'app-liabilities',
@@ -48,7 +49,9 @@ export class LiabilitiesComponent {
   constructor(
     private actionsSubject: ActionsSubject,
     public liabilitiesSelector: LiabilitiesSelectorService,
-  ) {}
+  ) {
+    actionsSubject.next(new GetLiabilitiesHttpRequestAction());
+  }
 
   trackByIndex(index: number) {
     return index;

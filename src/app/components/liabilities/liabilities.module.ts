@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material';
 import { UiModule } from '../../ui/ui.module';
 import { RouterModule } from '@angular/router';
@@ -12,6 +11,7 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { LiabilitiesSelectorService } from './liabilities.selector';
 import { EffectsModule } from '@ngrx/effects';
 import { LiabilitiesEffect } from './liabilities.effect';
+import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 const components = [LiabilitiesComponent, LiabilityEntryComponent];
 
@@ -25,7 +25,7 @@ const components = [LiabilitiesComponent, LiabilityEntryComponent];
     StoreModule.forFeature('liabilities', reducer),
     EffectsModule.forFeature([LiabilitiesEffect]),
   ],
-  providers: [LiabilitiesSelectorService],
+  providers: [BaseHttpService, LiabilitiesSelectorService],
   declarations: components,
   exports: components,
 })

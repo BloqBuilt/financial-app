@@ -2,8 +2,8 @@ import { Router } from 'express';
 import { ProfileExpressRouter } from './profile.controller';
 
 const router = Router();
-const profileExpressRouter = new ProfileExpressRouter();
 
-router.get('/', profileExpressRouter.get);
+router.get('/', ProfileExpressRouter.get);
+router.post('/', ProfileExpressRouter.post);
 
 export const profileRouter = router;

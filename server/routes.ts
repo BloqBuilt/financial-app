@@ -4,7 +4,7 @@ import { liabilitiesRouter } from './api/liabilities';
 import { profileRouter } from './api/profile';
 
 export const initializeRoutes = app => {
-  app.use('/api/asset', assetRouter);
+  app.use('/api/assets', assetRouter);
   app.use('/api/cash-flow', cashFlowRouter);
   app.use('/api/liabilities', liabilitiesRouter);
   app.use('/api/profile', profileRouter);

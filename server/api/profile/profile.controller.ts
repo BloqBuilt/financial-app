@@ -1,19 +1,19 @@
 export class ProfileExpressRouter {
-  localData = {
-    name: 'Roman',
-    age: 30,
-    retirementAge: 50,
-    lifeExpectancy: 90,
-  };
-
   constructor() {}
 
-  get(req, res) {
-    res.send(this.localData);
+  static get(req, res) {
+    console.log('GET - Profile');
+    res.send({
+      name: 'Roman',
+      age: 30,
+      retirementAge: 50,
+      lifeExpectancy: 90,
+    });
   }
 
-  save(req, res) {
-    console.log(req);
-    res.send(this.localData);
+  static post(req, res) {
+    console.log('POST - Profile');
+    console.log(req.body);
+    res.send({});
   }
 }

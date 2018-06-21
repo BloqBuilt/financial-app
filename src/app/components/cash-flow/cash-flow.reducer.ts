@@ -1,25 +1,18 @@
 import {
   createFormGroupState,
   createFormGroupReducerWithUpdate,
-  formGroupReducer,
   validate,
   updateArray,
   updateGroup,
   FormGroupState,
-  setValue,
-  disable,
-  enable,
 } from 'ngrx-forms';
-import { combineReducers, Action } from '@ngrx/store';
-import {
-  required,
-  greaterThan,
-  greaterThanOrEqualTo,
-} from 'ngrx-forms/validation';
+import { combineReducers } from '@ngrx/store';
+import { required } from 'ngrx-forms/validation';
 import {
   ICashFlowItem,
   CashFlowTypeEnum,
 } from '../../components/cash-flow/cash-flow.model';
+import { GetCashFlowHttpResponseAction } from './cash-flow.action';
 
 interface ICashFlowCollection {
   collection: ICashFlowItem[];
@@ -34,29 +27,7 @@ export const FORM_ID = 'cashFlow';
 export const INITIAL_STATE = createFormGroupState<ICashFlowCollection>(
   FORM_ID,
   {
-    collection: [
-      {
-        id: 1,
-        name: 'Hydro Bill',
-        amount: 120,
-        financialType: CashFlowTypeEnum.Expense,
-        isMonthly: true,
-      },
-      {
-        id: 2,
-        name: 'Mobile Bill',
-        amount: 60,
-        financialType: CashFlowTypeEnum.Expense,
-        isMonthly: true,
-      },
-      {
-        id: 3,
-        name: 'Income',
-        amount: 1000,
-        financialType: CashFlowTypeEnum.Income,
-        isMonthly: true,
-      },
-    ],
+    collection: [],
   },
 );
 
@@ -74,7 +45,13 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
 
 export const cashFlowReducer = (_s: any, _a: any) =>
   combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: Action) {
+    formState(s = INITIAL_STATE, a: GetCashFlowHttpResponseAction) {
+      switch (a.type) {
+        case GetCashFlowHttpResponseAction.TYPE:
+          return createFormGroupState<ICashFlowCollection>(FORM_ID, {
+            collection: a.payload,
+          });
+      }
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);

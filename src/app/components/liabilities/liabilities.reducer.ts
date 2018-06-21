@@ -18,6 +18,7 @@ import {
   greaterThan,
   greaterThanOrEqualTo,
 } from 'ngrx-forms/validation';
+import { GetLiabilitiesHttpResponseAction } from './liabilities.action';
 
 export const FORM_ID = 'liabilities';
 
@@ -32,29 +33,7 @@ export interface ILiabilityState {
 export const INITIAL_STATE = createFormGroupState<ILiabilityCollection>(
   FORM_ID,
   {
-    collection: [
-      {
-        id: 1,
-        name: 'CIBC',
-        amount: 300,
-        minimumPayment: 10,
-        financialType: LiabilityTypeEnum.CreditCard,
-      },
-      {
-        id: 2,
-        name: 'CIBC',
-        amount: 123,
-        minimumPayment: 20,
-        financialType: LiabilityTypeEnum.Loan,
-      },
-      {
-        id: 3,
-        name: 'CIBC',
-        amount: 123,
-        minimumPayment: 8,
-        financialType: LiabilityTypeEnum.Mortgage,
-      },
-    ],
+    collection: [],
   },
 );
 
@@ -72,7 +51,13 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
 
 export function reducer(_s: any, _a: any) {
   return combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: Action) {
+    formState(s = INITIAL_STATE, a: GetLiabilitiesHttpResponseAction) {
+      switch (a.type) {
+        case GetLiabilitiesHttpResponseAction.TYPE:
+          return createFormGroupState<ILiabilityCollection>(FORM_ID, {
+            collection: a.payload,
+          });
+      }
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);

@@ -12,6 +12,7 @@ import { cashFlowReducer } from './cash-flow.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CashFlowEffect } from './cash-flow.effect';
 import { CashFlowSelectorService } from './cash-flow.selector';
+import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 const components = [CashFlowComponent, CashFlowEntryComponent];
 
@@ -25,7 +26,7 @@ const components = [CashFlowComponent, CashFlowEntryComponent];
     StoreModule.forFeature('cashFlow', cashFlowReducer),
     EffectsModule.forFeature([CashFlowEffect]),
   ],
-  providers: [CashFlowSelectorService],
+  providers: [BaseHttpService, CashFlowSelectorService],
   declarations: components,
   exports: components,
 })

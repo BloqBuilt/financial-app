@@ -19,15 +19,16 @@ export const cashFlowFeatureSelector = createFeatureSelector<ICashFlowStore>(
 
 export const cashFlowCollectionSelector = createSelector(
   cashFlowFeatureSelector,
-  cashFlow => cashFlow.formState.controls.collection,
+  cashFlow =>
+    cashFlow.formState.controls.collection as FormArrayState<ICashFlowItem>,
 );
 
 export const cashFlowAutoSaveSelector = createSelector(
   cashFlowCollectionSelector,
   collection =>
-    (collection as FormArrayState<ICashFlowItem>).controls.filter(
-      (item: FormGroupState<ICashFlowItem>) => !item.isPristine && item.isValid,
-    ),
+    collection.controls
+      .filter(item => !item.isPristine && item.isValid)
+      .map(item => item.value),
 );
 
 export const cashFlowValueCollectionSelector = createSelector(

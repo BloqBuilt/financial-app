@@ -2,7 +2,7 @@ import { LiabilityTypeEnum } from '../../../src/app/components/liabilities/liabi
 
 export class LiabilitiesExpressRouter {
   static get(req, res) {
-    console.log('hit liabilities');
+    console.log('GET - Liabilities');
     res.send([
       {
         id: 1,
@@ -26,5 +26,11 @@ export class LiabilitiesExpressRouter {
         financialType: LiabilityTypeEnum.Mortgage,
       },
     ]);
+  }
+
+  static post(req, res) {
+    console.log('POST - Liabilities');
+    console.log(req.body);
+    res.send([]);
   }
 }
