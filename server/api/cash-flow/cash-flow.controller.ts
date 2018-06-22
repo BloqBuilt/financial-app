@@ -9,21 +9,18 @@ export class CashFlowExpressRouter {
         name: 'Hydro Bill',
         amount: 120,
         financialType: CashFlowTypeEnum.Expense,
-        isMonthly: true,
       },
       {
         id: 2,
         name: 'Mobile Bill',
         amount: 60,
         financialType: CashFlowTypeEnum.Expense,
-        isMonthly: true,
       },
       {
         id: 3,
         name: 'Income',
         amount: 1000,
         financialType: CashFlowTypeEnum.Income,
-        isMonthly: true,
       },
     ]);
   }
