@@ -31,6 +31,6 @@ export class LiabilitiesExpressRouter {
   static post(req, res) {
     console.log('POST - Liabilities');
     console.log(req.body);
-    res.send([]);
+    res.send(req.body);
   }
 }

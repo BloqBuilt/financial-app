@@ -4,7 +4,6 @@ import {
   CashFlowTypeEnum,
   ICashFlowItem,
 } from '../../../components/cash-flow/cash-flow.model';
-import { IsMonthlyOptions } from '../../../models/common';
 
 @Component({
   selector: 'app-cash-flow-entry',

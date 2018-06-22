@@ -1,3 +1,5 @@
+import { createGuid } from '../../utils/guid';
+
 export enum CashFlowTypeEnum {
   Income = 'Income',
   Expense = 'Expense',
@@ -8,15 +10,17 @@ export interface ICashFlowItem {
   name: string;
   amount: number;
   financialType: CashFlowTypeEnum;
-  isMonthly: boolean;
 }
 
 export class CashFlowItem implements ICashFlowItem {
-  constructor(
-    public id: number = null,
-    public name: string = null,
-    public amount: number = null,
-    public financialType: CashFlowTypeEnum = null,
-    public isMonthly: boolean = null,
-  ) {}
+  id: number;
+  name: string;
+  amount: number;
+  financialType: CashFlowTypeEnum;
+  constructor(item: ICashFlowItem, public uiGuid: string = createGuid()) {
+    this.id = item.id;
+    this.name = item.name;
+    this.amount = item.amount;
+    this.financialType = item.financialType;
+  }
 }

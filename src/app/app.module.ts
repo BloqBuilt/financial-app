@@ -10,7 +10,6 @@ import { routes } from './app.router';
 
 // Components
 import { AppComponent } from './app.component';
-import { NgrxFormsModule } from 'ngrx-forms';
 
 @NgModule({
   declarations: [AppComponent],

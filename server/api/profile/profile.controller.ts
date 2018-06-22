@@ -14,6 +14,6 @@ export class ProfileExpressRouter {
   static post(req, res) {
     console.log('POST - Profile');
     console.log(req.body);
-    res.send({});
+    res.send(req.body);
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  ILiabilityItem,
+  LiabilityItem,
   LiabilityTypeEnum,
 } from '../../components/liabilities/liabilities.model';
 import { filter, map } from 'rxjs/operators';
@@ -26,10 +26,10 @@ export const liabilitiesCollectionSelector = createSelector(
 export const liabilitiesAutoSaveSelector = createSelector(
   liabilitiesCollectionSelector,
   collection =>
-    (collection as FormArrayState<ILiabilityItem>).controls
+    (collection as FormArrayState<LiabilityItem>).controls
       .filter(
-        (item: FormGroupState<ILiabilityItem>) =>
-          !item.isPristine && item.isValid,
+        (item: FormGroupState<LiabilityItem>) =>
+          !item.isPristine && item.isValid && !item.isSubmitted,
       )
       .map(item => item.value),
 );
@@ -39,17 +39,17 @@ export const liabilitiesValueCollectionSelector = createSelector(
   liabilities => liabilities.formState.value.collection,
 );
 
-export const isCreditCard = (item: ILiabilityItem) =>
+export const isCreditCard = (item: LiabilityItem) =>
   item.financialType === LiabilityTypeEnum.CreditCard;
 
-export const isLoan = (item: ILiabilityItem) =>
+export const isLoan = (item: LiabilityItem) =>
   item.financialType === LiabilityTypeEnum.Loan;
 
-export const isMortgage = (item: ILiabilityItem) =>
+export const isMortgage = (item: LiabilityItem) =>
   item.financialType === LiabilityTypeEnum.Mortgage;
 
 export const aggregateCollection = (
-  filterFunction: (item: ILiabilityItem) => boolean,
+  filterFunction: (item: LiabilityItem) => boolean,
 ) =>
   createSelector(liabilitiesValueCollectionSelector, collection => {
     if (doesCollectionContainElements(collection)) {

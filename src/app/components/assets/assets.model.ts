@@ -1,3 +1,5 @@
+import { createGuid } from '../../utils/guid';
+
 export enum AssetTypeEnum {
   RealEstate = 'Real Estate',
   Investment = 'Investment',
@@ -13,10 +15,14 @@ export interface IAssetItem {
 }
 
 export class AssetItem implements IAssetItem {
-  constructor(
-    public name: string = null,
-    public amount: number = null,
-    public financialType: AssetTypeEnum = null,
-    public id: number = null,
-  ) {}
+  name: string;
+  amount: number;
+  financialType: AssetTypeEnum;
+  id: number;
+  constructor(item: IAssetItem, public uiGuid: string = createGuid()) {
+    this.name = item.name;
+    this.amount = item.amount;
+    this.financialType = item.financialType;
+    this.id = item.id;
+  }
 }

@@ -49,7 +49,6 @@ export class CashFlowEffect {
       mergeMap((action: GetCashFlowHttpRequestAction) =>
         this.baseHttp.getData('cash-flow').pipe(
           map((res: Response) => new GetCashFlowHttpResponseAction(res.json())),
-
           catchError(() => of(new GetCashFlowHttpErrorAction())),
         ),
       ),

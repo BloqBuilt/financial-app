@@ -52,9 +52,14 @@ export class CashFlowComponent {
 
   addItem() {
     this.actionsSubject.next(
-      new AddArrayControlAction<ICashFlowItem>(
+      new AddArrayControlAction<CashFlowItem>(
         'cashFlow.collection',
-        new CashFlowItem(),
+        new CashFlowItem({
+          id: null,
+          name: null,
+          amount: null,
+          financialType: null,
+        }),
       ),
     );
   }

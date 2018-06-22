@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, createSelector, createFeatureSelector } from '@ngrx/store';
 import {
-  ICashFlowItem,
+  CashFlowItem,
   CashFlowTypeEnum,
 } from '../../components/cash-flow/cash-flow.model';
 import { Observable } from 'rxjs/Observable';
@@ -20,14 +20,14 @@ export const cashFlowFeatureSelector = createFeatureSelector<ICashFlowStore>(
 export const cashFlowCollectionSelector = createSelector(
   cashFlowFeatureSelector,
   cashFlow =>
-    cashFlow.formState.controls.collection as FormArrayState<ICashFlowItem>,
+    cashFlow.formState.controls.collection as FormArrayState<CashFlowItem>,
 );
 
 export const cashFlowAutoSaveSelector = createSelector(
   cashFlowCollectionSelector,
   collection =>
     collection.controls
-      .filter(item => !item.isPristine && item.isValid)
+      .filter(item => !item.isPristine && item.isValid && !item.isSubmitted)
       .map(item => item.value),
 );
 
@@ -36,14 +36,14 @@ export const cashFlowValueCollectionSelector = createSelector(
   cashFlow => cashFlow.formState.value.collection,
 );
 
-export const isExpense = (item: ICashFlowItem) =>
+export const isExpense = (item: CashFlowItem) =>
   item.financialType === CashFlowTypeEnum.Expense;
 
-export const isIncome = (item: ICashFlowItem) =>
+export const isIncome = (item: CashFlowItem) =>
   item.financialType === CashFlowTypeEnum.Income;
 
 export const aggregateCollection = (
-  filterFunction: (item: ICashFlowItem) => boolean,
+  filterFunction: (item: CashFlowItem) => boolean,
 ) =>
   createSelector(cashFlowValueCollectionSelector, collection => {
     if (doesCollectionContainElements(collection)) {

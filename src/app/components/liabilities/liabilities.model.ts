@@ -1,3 +1,5 @@
+import { createGuid } from '../../utils/guid';
+
 export enum LiabilityTypeEnum {
   CreditCard = 'CreditCard',
   Loan = 'Loan',
@@ -13,11 +15,16 @@ export interface ILiabilityItem {
 }
 
 export class LiabilityItem implements ILiabilityItem {
-  constructor(
-    public id: number = null,
-    public name: string = null,
-    public amount: number = null,
-    public minimumPayment: number = null,
-    public financialType: LiabilityTypeEnum = null,
-  ) {}
+  id: number;
+  name: string;
+  amount: number;
+  minimumPayment: number;
+  financialType: LiabilityTypeEnum;
+  constructor(item: ILiabilityItem, public uiGuid: string = createGuid()) {
+    this.id = item.id;
+    this.name = item.name;
+    this.amount = item.amount;
+    this.minimumPayment = item.minimumPayment;
+    this.financialType = item.financialType;
+  }
 }

@@ -34,6 +34,6 @@ export class AssetRouterExpressRouter {
   static post(req, res) {
     console.log('POST - Assets');
     console.log(req.body);
-    res.send([]);
+    res.send(req.body);
   }
 }

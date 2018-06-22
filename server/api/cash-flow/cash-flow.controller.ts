@@ -28,6 +28,6 @@ export class CashFlowExpressRouter {
   static post(req, res) {
     console.log('POST - Cash Flow');
     console.log(req.body);
-    res.send([]);
+    res.send(req.body);
   }
 }

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import {
-  IAssetItem,
-  AssetTypeEnum,
-} from '../../components/assets/assets.model';
+import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { IAssetsStore } from '../../components/assets/assets.reducer';
 import {
   AbstractControlState,
@@ -21,14 +18,14 @@ export const assetsFeature = createFeatureSelector<IAssetsStore>('assets');
 
 export const assetCollectionSelector = createSelector(
   assetsFeature,
-  assets => assets.formState.controls.collection as FormArrayState<IAssetItem>,
+  assets => assets.formState.controls.collection as FormArrayState<AssetItem>,
 );
 
 export const assetsAutoSaveSelector = createSelector(
   assetCollectionSelector,
   collection =>
     collection.controls
-      .filter(item => !item.isPristine && item.isValid)
+      .filter(item => !item.isPristine && item.isValid && !item.isSubmitted)
       .map(item => item.value),
 );
 
@@ -37,20 +34,20 @@ export const assetValueCollectionSelector = createSelector(
   assets => assets.formState.value.collection,
 );
 
-export const isInvestment = (item: IAssetItem) =>
+export const isInvestment = (item: AssetItem) =>
   item.financialType === AssetTypeEnum.Investment;
 
-export const isRealEstate = (item: IAssetItem) =>
+export const isRealEstate = (item: AssetItem) =>
   item.financialType === AssetTypeEnum.RealEstate;
 
-export const isRRSP = (item: IAssetItem) =>
+export const isRRSP = (item: AssetItem) =>
   item.financialType === AssetTypeEnum.RRSP;
 
-export const isTFSA = (item: IAssetItem) =>
+export const isTFSA = (item: AssetItem) =>
   item.financialType === AssetTypeEnum.TFSA;
 
 export const aggregateCollection = (
-  filterFunction: (item: IAssetItem) => boolean,
+  filterFunction: (item: AssetItem) => boolean,
 ) =>
   createSelector(assetValueCollectionSelector, collection => {
     if (doesCollectionContainElements(collection)) {

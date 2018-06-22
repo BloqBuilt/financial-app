@@ -11,12 +11,20 @@ import {
   validate,
   createFormGroupState,
   FormGroupState,
+  setValue,
+  markAsPristine,
+  markAsUnsubmitted,
+  markAsSubmitted,
 } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
-import { GetAssetsHttpResponseAction } from './assets.action';
+import {
+  GetAssetsHttpResponseAction,
+  SaveAssetsHttpRequestAction,
+  SaveAssetsHttpResponseAction,
+} from './assets.action';
 
 export interface IAssetsCollection {
-  collection: Array<IAssetItem>;
+  collection: Array<AssetItem>;
 }
 
 export interface IAssetsStore {
@@ -25,15 +33,16 @@ export interface IAssetsStore {
 
 export const FORM_ID = 'assets';
 
-export const INITIAL_STATE = createFormGroupState<IAssetsCollection>(FORM_ID, {
-  collection: [],
-});
+export const createFormState = (collection: AssetItem[] = []) =>
+  createFormGroupState<IAssetsCollection>(FORM_ID, {
+    collection,
+  });
 
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
   IAssetsCollection
 >({
-  collection: updateArray<IAssetItem>(
-    updateGroup<IAssetItem>({
+  collection: updateArray<AssetItem>(
+    updateGroup<AssetItem>({
       name: validate<string>(required),
       amount: validate<number>(required),
       financialType: validate<AssetTypeEnum>(required),
@@ -41,14 +50,60 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
   ),
 });
 
+const updateFormGroupBeforeSave = (
+  s: FormGroupState<IAssetsCollection>,
+  a: SaveAssetsHttpRequestAction,
+) =>
+  updateGroup<IAssetsCollection>({
+    collection: updateArray<AssetItem>(function(tableRow) {
+      const correspondingItem = a.payload.find(
+        item => item.uiGuid === tableRow.value.uiGuid,
+      );
+
+      if (correspondingItem !== undefined) {
+        return markAsSubmitted(tableRow);
+      } else {
+        return tableRow;
+      }
+    }),
+  })(s);
+
+const updateFormGroupAfterSave = (
+  s: FormGroupState<IAssetsCollection>,
+  a: SaveAssetsHttpResponseAction,
+) =>
+  updateGroup<IAssetsCollection>({
+    collection: updateArray<AssetItem>(function(tableRow) {
+      const correspondingItem = a.payload.find(
+        item => item.uiGuid === tableRow.value.uiGuid,
+      );
+
+      if (correspondingItem !== undefined) {
+        return markAsUnsubmitted(
+          markAsPristine(
+            updateGroup<AssetItem>({
+              id: setValue<number>(correspondingItem.id),
+            })(tableRow),
+          ),
+        );
+      } else {
+        return tableRow;
+      }
+    }),
+  })(s);
+
 export const assetListReducer = (_s: any, _a: any) =>
   combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: GetAssetsHttpResponseAction) {
+    formState(s = createFormState(), a: GetAssetsHttpResponseAction) {
       switch (a.type) {
         case GetAssetsHttpResponseAction.TYPE:
           return createFormGroupState<IAssetsCollection>(FORM_ID, {
             collection: a.payload,
           });
+        case SaveAssetsHttpRequestAction.TYPE:
+          return updateFormGroupBeforeSave(s, a);
+        case SaveAssetsHttpResponseAction.TYPE:
+          return updateFormGroupAfterSave(s, a);
       }
       return validationFormGroupReducer(s, a);
     },
