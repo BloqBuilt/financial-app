@@ -4,6 +4,7 @@ import {
   CashFlowTypeEnum,
   ICashFlowItem,
 } from '../../../components/cash-flow/cash-flow.model';
+import { IsMonthlyOptions } from '../../../models/common';
 
 @Component({
   selector: 'app-cash-flow-entry',
@@ -12,7 +13,7 @@ import {
 })
 export class CashFlowEntryComponent {
   @Input() formState: FormGroupState<ICashFlowItem>;
-  private optionList: CashFlowTypeEnum[] = [
+  private typeOptions: CashFlowTypeEnum[] = [
     CashFlowTypeEnum.Expense,
     CashFlowTypeEnum.Income,
   ];

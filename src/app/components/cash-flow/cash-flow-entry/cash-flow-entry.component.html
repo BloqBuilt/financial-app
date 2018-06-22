@@ -15,7 +15,7 @@
   <div class="dtc mh3 ph2">
     <mat-form-field class="flex">
       <mat-select [ngrxFormControlState]="formState.controls.financialType">
-        <mat-option *ngFor="let optionItem of optionList"
+        <mat-option *ngFor="let optionItem of typeOptions"
           [value]="optionItem">
           {{ optionItem }}
         </mat-option>
