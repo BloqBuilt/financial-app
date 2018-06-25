@@ -59,7 +59,12 @@ export class AssetsComponent {
     this.actionsSubject.next(
       new AddArrayControlAction<IAssetItem>(
         'assets.collection',
-        new AssetItem(),
+        new AssetItem({
+          id: null,
+          name: null,
+          amount: null,
+          financialType: null,
+        }),
       ),
     );
   }

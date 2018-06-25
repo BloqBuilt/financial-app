@@ -61,7 +61,13 @@ export class LiabilitiesComponent {
     this.actionsSubject.next(
       new AddArrayControlAction<ILiabilityItem>(
         'liabilities.collection',
-        new LiabilityItem(),
+        new LiabilityItem({
+          id: null,
+          name: null,
+          amount: null,
+          minimumPayment: null,
+          financialType: null,
+        }),
       ),
     );
   }
