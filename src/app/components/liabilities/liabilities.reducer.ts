@@ -1,12 +1,10 @@
 import {
   createFormGroupState,
   createFormGroupReducerWithUpdate,
-  formGroupReducer,
   validate,
   updateArray,
   updateGroup,
   FormGroupState,
-  FormArrayState,
   markAsSubmitted,
   markAsUnsubmitted,
   markAsPristine,
@@ -27,6 +25,7 @@ import {
   SaveLiabilitiesHttpRequestAction,
   SaveLiabilitiesHttpResponseAction,
 } from './liabilities.action';
+import R = require('ramda');
 
 export const FORM_ID = 'liabilities';
 
@@ -84,13 +83,13 @@ const updateFormGroupAfterSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsUnsubmitted(
-          markAsPristine(
-            updateGroup<LiabilityItem>({
-              id: setValue<number>(correspondingItem.id),
-            })(tableRow),
-          ),
-        );
+        return R.pipe(
+          markAsUnsubmitted,
+          markAsPristine,
+          updateGroup<LiabilityItem>({
+            id: setValue<number>(correspondingItem.id),
+          }),
+        )(tableRow);
       } else {
         return tableRow;
       }

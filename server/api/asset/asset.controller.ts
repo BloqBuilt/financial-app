@@ -7,13 +7,13 @@ export class AssetRouterExpressRouter {
       {
         id: 1,
         name: 'Home',
-        amount: 30000,
+        amount: 100000,
         financialType: AssetTypeEnum.RealEstate,
       },
       {
         id: 2,
         name: 'Stocks',
-        amount: 5000,
+        amount: 2000,
         financialType: AssetTypeEnum.Investment,
       },
       {

@@ -25,6 +25,7 @@ import {
   SaveCashFlowHttpErrorAction,
   CashFlowHttpActions,
 } from './cash-flow.action';
+import R = require('ramda');
 
 interface ICashFlowCollection {
   collection: CashFlowItem[];
@@ -86,13 +87,13 @@ const updateFormGroupAfterSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsUnsubmitted(
-          markAsPristine(
-            updateGroup<CashFlowItem>({
-              id: setValue<number>(correspondingItem.id),
-            })(tableRow),
-          ),
-        );
+        return R.pipe(
+          markAsUnsubmitted,
+          markAsPristine,
+          updateGroup<CashFlowItem>({
+            id: setValue<number>(correspondingItem.id),
+          }),
+        )(tableRow);
       } else {
         return tableRow;
       }

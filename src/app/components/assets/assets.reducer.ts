@@ -22,6 +22,7 @@ import {
   SaveAssetsHttpRequestAction,
   SaveAssetsHttpResponseAction,
 } from './assets.action';
+import R = require('ramda');
 
 export interface IAssetsCollection {
   collection: Array<AssetItem>;
@@ -79,13 +80,13 @@ const updateFormGroupAfterSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsUnsubmitted(
-          markAsPristine(
-            updateGroup<AssetItem>({
-              id: setValue<number>(correspondingItem.id),
-            })(tableRow),
-          ),
-        );
+        return R.pipe(
+          markAsUnsubmitted,
+          markAsPristine,
+          updateGroup<AssetItem>({
+            id: setValue<number>(correspondingItem.id),
+          }),
+        )(tableRow);
       } else {
         return tableRow;
       }
