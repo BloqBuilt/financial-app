@@ -10,7 +10,7 @@
   </ui-summary>
   <ui-card>
     <ui-table-row-header [tableHeaders]="tableHeaders"
-      (addItem)="assetAdd()"></ui-table-row-header>
+      (addItem)="addItem()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
       *ngFor="let listItem of (assetList$ | async)?.controls; let even = even;"
       (deleteItem)="deleteItem(i)">
@@ -24,12 +24,13 @@
       Info
     </ui-card-header>
     <div class="pa3">
-      <p>Assets are items that retain value and can be sold at a future date.</p>
+      <p>Assets are items can be liquidated for cash.</p>
       <p>Not every asset is the same, some depreciate value as they age while others increase in value.</p>
       <div class="flex">
         <div class="flex flex-column w-50">
           <p>Examples of Increasing Assets:</p>
           <ul>
+            <li>Cash</li>
             <li>Real Estate</li>
             <li>Financial Investments (Stocks, ETFs, ect.)</li>
             <li>Collectable Items</li>

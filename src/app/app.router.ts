@@ -3,8 +3,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/profile',
+    redirectTo: '/summary',
     pathMatch: 'full',
+  },
+  {
+    path: 'summary',
+    loadChildren: './components/summary/summary.module#SummaryModule',
   },
   {
     path: 'profile',

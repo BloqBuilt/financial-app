@@ -29,7 +29,7 @@ export class CashFlowComponent {
     CashFlowTypeEnum.Expense,
   ];
   chartColors: any[] = [{ backgroundColor: ['#19A974', '#FF4136'] }];
-  tableHeaders: string[] = ['Name', 'Amount', 'Cash Flow Type'];
+  tableHeaders: string[] = ['Name', 'Monthly Amount', 'Cash Flow Type'];
 
   cashFlowList$ = this.cashFlowSelector.collection$;
   chartData$ = this.cashFlowSelector.chartData$;

@@ -11,6 +11,7 @@ export class AppComponent {
 
   private isMenuToggled = false;
   private menuList: INavigation[] = [
+    new Navigation('bar_chart', 'Summary', '/summary'),
     new Navigation('person', 'My Profile', '/profile'),
     new Navigation('work', 'Cash Flow', '/cash-flow'),
     new Navigation('trending_up', 'Assets', '/assets'),

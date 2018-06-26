@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UiModule } from '../../ui/ui.module';
+import { MaterialModule } from '../../material';
+import { RouterModule } from '@angular/router';
+import { NgrxFormsModule } from 'ngrx-forms';
+import { BaseHttpService } from '../../api/base-http/base-http.service';
+import { SummaryComponent } from './summary.component';
+
+const components = [SummaryComponent];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    UiModule,
+    MaterialModule,
+    NgrxFormsModule,
+    RouterModule.forChild([{ path: '', component: SummaryComponent }]),
+  ],
+  providers: [BaseHttpService],
+  declarations: components,
+  exports: components,
+})
+export class SummaryModule {}

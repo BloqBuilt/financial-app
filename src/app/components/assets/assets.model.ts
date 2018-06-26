@@ -1,6 +1,7 @@
 import { createGuid } from '../../utils/guid';
 
 export enum AssetTypeEnum {
+  Cash = 'Cash',
   RealEstate = 'Real Estate',
   Investment = 'Investment',
   RRSP = 'RRSP',

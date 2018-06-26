@@ -32,7 +32,7 @@ export class AssetsComponent {
     AssetTypeEnum.RRSP,
     AssetTypeEnum.TFSA,
   ];
-  tableHeaders: string[] = ['Name', 'Amount', 'Asset Type'];
+  tableHeaders: string[] = ['Name', 'Cash Value', 'Asset Type'];
 
   assetList$ = this.assetsSelector.collection$;
   chartData$ = this.assetsSelector.chartData$;
@@ -57,7 +57,7 @@ export class AssetsComponent {
 
   addItem() {
     this.actionsSubject.next(
-      new AddArrayControlAction<IAssetItem>(
+      new AddArrayControlAction<AssetItem>(
         'assets.collection',
         new AssetItem({
           id: null,
