@@ -10,16 +10,9 @@ import {
   markAsPristine,
   setValue,
 } from 'ngrx-forms';
-import {
-  LiabilityItem,
-  LiabilityTypeEnum,
-} from '../../components/liabilities/liabilities.model';
-import { combineReducers, Action } from '@ngrx/store';
-import {
-  required,
-  greaterThan,
-  greaterThanOrEqualTo,
-} from 'ngrx-forms/validation';
+import { LiabilityItem } from '../../components/liabilities/liabilities.model';
+import { combineReducers } from '@ngrx/store';
+import { required } from 'ngrx-forms/validation';
 import {
   GetLiabilitiesHttpResponseAction,
   SaveLiabilitiesHttpRequestAction,
@@ -65,7 +58,7 @@ const updateFormGroupBeforeSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsSubmitted(tableRow);
+        return markAsPristine(markAsSubmitted(tableRow));
       } else {
         return tableRow;
       }
@@ -85,7 +78,6 @@ const updateFormGroupAfterSave = (
       if (correspondingItem !== undefined) {
         return R.pipe(
           markAsUnsubmitted,
-          markAsPristine,
           updateGroup<LiabilityItem>({
             id: setValue<number>(correspondingItem.id),
           }),

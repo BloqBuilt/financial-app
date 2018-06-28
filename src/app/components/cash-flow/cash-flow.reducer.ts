@@ -69,7 +69,7 @@ const updateFormGroupBeforeSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsSubmitted(tableRow);
+        return markAsPristine(markAsSubmitted(tableRow));
       } else {
         return tableRow;
       }
@@ -89,7 +89,6 @@ const updateFormGroupAfterSave = (
       if (correspondingItem !== undefined) {
         return R.pipe(
           markAsUnsubmitted,
-          markAsPristine,
           updateGroup<CashFlowItem>({
             id: setValue<number>(correspondingItem.id),
           }),

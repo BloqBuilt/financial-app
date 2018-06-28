@@ -1,8 +1,4 @@
-import {
-  AssetItem,
-  IAssetItem,
-  AssetTypeEnum,
-} from '../../components/assets/assets.model';
+import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { combineReducers, Action } from '@ngrx/store';
 import {
   createFormGroupReducerWithUpdate,
@@ -62,7 +58,7 @@ const updateFormGroupBeforeSave = (
       );
 
       if (correspondingItem !== undefined) {
-        return markAsSubmitted(tableRow);
+        return markAsPristine(markAsSubmitted(tableRow));
       } else {
         return tableRow;
       }
@@ -82,7 +78,6 @@ const updateFormGroupAfterSave = (
       if (correspondingItem !== undefined) {
         return R.pipe(
           markAsUnsubmitted,
-          markAsPristine,
           updateGroup<AssetItem>({
             id: setValue<number>(correspondingItem.id),
           }),
