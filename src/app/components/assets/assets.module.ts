@@ -8,7 +8,6 @@ import { NgrxFormsModule } from 'ngrx-forms';
 
 import { AssetsComponent } from './assets.component';
 import { AssetEntryComponent } from './asset-entry/asset-entry.component';
-import { assetListReducer } from './assets.reducer';
 import { AssetsSelectorService } from './assets.selector';
 import { EffectsModule } from '@ngrx/effects';
 import { AssetsEffect } from './assets.effect';
@@ -23,7 +22,6 @@ const components = [AssetsComponent, AssetEntryComponent];
     NgrxFormsModule,
     MaterialModule,
     RouterModule.forChild([{ path: '', component: AssetsComponent }]),
-    StoreModule.forFeature('assets', assetListReducer),
     EffectsModule.forFeature([AssetsEffect]),
   ],
   providers: [BaseHttpService, AssetsSelectorService],

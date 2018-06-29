@@ -11,6 +11,7 @@ import {
   markAsPristine,
   markAsUnsubmitted,
   markAsSubmitted,
+  setErrors,
 } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 import {
@@ -20,6 +21,8 @@ import {
 } from './assets.action';
 import R = require('ramda');
 
+export const FORM_ID = 'assets';
+
 export interface IAssetsCollection {
   collection: Array<AssetItem>;
 }
@@ -28,7 +31,17 @@ export interface IAssetsStore {
   formState: FormGroupState<IAssetsCollection>;
 }
 
-export const FORM_ID = 'assets';
+function isNameUniqueValidator(isNameUnique: boolean) {
+  return (value: string) => {
+    return isNameUnique
+      ? null
+      : {
+          nameNotUnique: {
+            errorMessage: 'This message is not unique',
+          },
+        };
+  };
+}
 
 export const createFormState = (collection: AssetItem[] = []) =>
   createFormGroupState<IAssetsCollection>(FORM_ID, {
@@ -38,13 +51,20 @@ export const createFormState = (collection: AssetItem[] = []) =>
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
   IAssetsCollection
 >({
-  collection: updateArray<AssetItem>(
-    updateGroup<AssetItem>({
-      name: validate<string>(required),
+  collection: updateArray<AssetItem>((tableRow, collection) => {
+    const isNameUnique =
+      collection.value.find(
+        item =>
+          item.name === tableRow.value.name &&
+          item.uiGuid !== tableRow.value.uiGuid,
+      ) === undefined;
+
+    return updateGroup<AssetItem>({
+      name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
       amount: validate<number>(required),
       financialType: validate<AssetTypeEnum>(required),
-    }),
-  ),
+    })(tableRow);
+  }),
 });
 
 const updateFormGroupBeforeSave = (
@@ -59,9 +79,8 @@ const updateFormGroupBeforeSave = (
 
       if (correspondingItem !== undefined) {
         return markAsPristine(markAsSubmitted(tableRow));
-      } else {
-        return tableRow;
       }
+      return tableRow;
     }),
   })(s);
 
@@ -88,14 +107,12 @@ const updateFormGroupAfterSave = (
     }),
   })(s);
 
-export const assetListReducer = (_s: any, _a: any) =>
+export const assetsReducer = (_s: any, _a: any) =>
   combineReducers<any, any>({
     formState(s = createFormState(), a: GetAssetsHttpResponseAction) {
       switch (a.type) {
         case GetAssetsHttpResponseAction.TYPE:
-          return createFormGroupState<IAssetsCollection>(FORM_ID, {
-            collection: a.payload,
-          });
+          return createFormState(a.payload.map(item => new AssetItem(item)));
         case SaveAssetsHttpRequestAction.TYPE:
           return updateFormGroupBeforeSave(s, a);
         case SaveAssetsHttpResponseAction.TYPE:

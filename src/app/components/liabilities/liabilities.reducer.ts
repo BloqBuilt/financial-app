@@ -38,13 +38,17 @@ export const createFormState = (collection: LiabilityItem[] = []) =>
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<
   ILiabilityCollection
 >({
-  collection: updateArray<LiabilityItem>(
-    updateGroup<LiabilityItem>({
+  collection: updateArray<LiabilityItem>((tableRow, collection) => {
+    const isNameUnique =
+      collection.value.find(item => item.name === tableRow.value.name) ===
+      undefined;
+
+    return updateGroup<LiabilityItem>({
       name: validate<string>(required),
       amount: validate<number>(required),
       minimumPayment: validate<number>(required),
-    }),
-  ),
+    })(tableRow);
+  }),
 });
 
 const updateFormGroupBeforeSave = (
@@ -59,9 +63,8 @@ const updateFormGroupBeforeSave = (
 
       if (correspondingItem !== undefined) {
         return markAsPristine(markAsSubmitted(tableRow));
-      } else {
-        return tableRow;
       }
+      return tableRow;
     }),
   })(s);
 
@@ -88,8 +91,8 @@ const updateFormGroupAfterSave = (
     }),
   })(s);
 
-export function reducer(_s: any, _a: any) {
-  return combineReducers<any, any>({
+export const liabilitiesReducer = (_s: any, _a: any) =>
+  combineReducers<any, any>({
     formState(s = createFormState(), a: GetLiabilitiesHttpResponseAction) {
       switch (a.type) {
         case GetLiabilitiesHttpResponseAction.TYPE:
@@ -104,4 +107,3 @@ export function reducer(_s: any, _a: any) {
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);
-}

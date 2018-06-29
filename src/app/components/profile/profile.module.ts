@@ -21,7 +21,6 @@ const components = [ProfileComponent];
     MaterialModule,
     NgrxFormsModule,
     RouterModule.forChild([{ path: '', component: ProfileComponent }]),
-    StoreModule.forFeature('profile', profileReducer),
     EffectsModule.forFeature([ProfileEffect]),
   ],
   providers: [BaseHttpService, ProfileSelectorService],

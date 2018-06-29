@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { LiabilitiesComponent } from './liabilities.component';
 import { LiabilityEntryComponent } from './liability-entry/liability-entry.component';
-import { reducer } from './liabilities.reducer';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { LiabilitiesSelectorService } from './liabilities.selector';
 import { EffectsModule } from '@ngrx/effects';
@@ -22,7 +21,6 @@ const components = [LiabilitiesComponent, LiabilityEntryComponent];
     MaterialModule,
     NgrxFormsModule,
     RouterModule.forChild([{ path: '', component: LiabilitiesComponent }]),
-    StoreModule.forFeature('liabilities', reducer),
     EffectsModule.forFeature([LiabilitiesEffect]),
   ],
   providers: [BaseHttpService, LiabilitiesSelectorService],
