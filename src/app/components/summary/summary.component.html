@@ -3,6 +3,58 @@
 </ui-page-header>
 <ui-page-scroll>
   <ui-card>
-    Summary Info
+    <ui-card-header>
+      Summary Info
+    </ui-card-header>
+    <div class="flex">
+      <div class="flex flex-column pa3 w-100">
+        <div class="flex justify-between w-100 pv1">
+          <div>Age</div>
+          <div>{{(summary$ | async)?.age}}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1">
+          <div>Retirement Age</div>
+          <div>{{(summary$ | async)?.retirementAge}}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1">
+          <div>Life Expectancy</div>
+          <div>{{(summary$ | async)?.lifeExpectancy}}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1 bt bw-1">
+          <div>Years Until Retirement</div>
+          <div>{{(yearToRetire$ | async)}}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1">
+          <div>Years in Retirement</div>
+          <div>{{(yearInRetirement$ | async)}}</div>
+        </div>
+      </div>
+      <div class="flex flex-column pa3 w-100">
+        <div class="flex justify-between w-100 pv1">
+          <div>Assets</div>
+          <div>{{(summary$ | async)?.assets | currency }}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1">
+          <div>Liabilities</div>
+          <div>{{(summary$ | async)?.liabilities | currency }}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1">
+          <div>Cash Flow</div>
+          <div>{{(summary$ | async)?.cashFlow | currency }}</div>
+        </div>
+        <div class="flex justify-between w-100 pv1 bt bw-1">
+          <div>Net Worth</div>
+          <div>{{(netWorth$ | async) | currency}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column justify-center w-100 pa3">
+      <div>Net Worth Progress</div>
+      <ui-chart *ngIf="(summaryChartData$ | async) && (summaryChartLabels$ | async)"
+        chartType="line"
+        [chartData]="summaryChartData$ | async"
+        [chartLabels]="summaryChartLabels$ | async">
+      </ui-chart>
+    </div>
   </ui-card>
 </ui-page-scroll>

@@ -1,10 +1,13 @@
-import { combineReducers, Action } from '@ngrx/store';
+import { combineReducers } from '@ngrx/store';
 import {
   createFormGroupState,
   createFormGroupReducerWithUpdate,
   validate,
   AbstractControlState,
   FormGroupState,
+  disable,
+  setValue,
+  enable,
 } from 'ngrx-forms';
 import { required, lessThan, greaterThan } from 'ngrx-forms/validation';
 import { IProfile } from './profile.model';
@@ -22,7 +25,20 @@ export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
 const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
   name: validate<string>(required),
   age: validate<number>([required, greaterThan(0), lessThan(120)]),
-  retirementAge: validate<number>([required, greaterThan(0), lessThan(120)]),
+  retirementAge: (
+    retirementAge: AbstractControlState<number>,
+    rootForm: FormGroupState<IProfile>,
+  ) => {
+    if (rootForm.value.lifeExpectancy < 10) {
+      return disable(setValue(20, retirementAge));
+    } else {
+      return enable(
+        validate<number>([required, greaterThan(0), lessThan(120)])(
+          retirementAge,
+        ),
+      );
+    }
+  },
   lifeExpectancy: (
     lifeExpectancy: AbstractControlState<number>,
     rootForm: FormGroupState<IProfile>,

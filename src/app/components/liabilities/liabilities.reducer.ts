@@ -40,16 +40,31 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
 >({
   collection: updateArray<LiabilityItem>((tableRow, collection) => {
     const isNameUnique =
-      collection.value.find(item => item.name === tableRow.value.name) ===
-      undefined;
+      collection.value.find(
+        item =>
+          item.name === tableRow.value.name &&
+          item.uiGuid !== tableRow.value.uiGuid,
+      ) === undefined;
 
     return updateGroup<LiabilityItem>({
-      name: validate<string>(required),
+      name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
       amount: validate<number>(required),
       minimumPayment: validate<number>(required),
     })(tableRow);
   }),
 });
+
+function isNameUniqueValidator(isNameUnique: boolean) {
+  return (value: string) => {
+    return isNameUnique
+      ? null
+      : {
+          nameNotUnique: {
+            errorMessage: 'Name is not unique!',
+          },
+        };
+  };
+}
 
 const updateFormGroupBeforeSave = (
   s: FormGroupState<ILiabilityCollection>,

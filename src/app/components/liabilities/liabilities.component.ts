@@ -1,6 +1,5 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import {
-  ILiabilityItem,
   LiabilityItem,
   LiabilityTypeEnum,
 } from '../../components/liabilities/liabilities.model';
@@ -17,7 +16,8 @@ import { GetLiabilitiesHttpRequestAction } from './liabilities.action';
   styleUrls: ['./liabilities.component.scss'],
 })
 export class LiabilitiesComponent {
-  @HostBinding('class') classes = 'flex flex-column';
+  @HostBinding('class')
+  classes = 'flex flex-column';
 
   summaryLabels: string[] = [
     LiabilityTypeEnum.CreditCard,

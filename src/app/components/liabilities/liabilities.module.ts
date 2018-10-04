@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material';
 import { UiModule } from '../../ui/ui.module';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
 import { LiabilitiesComponent } from './liabilities.component';
 import { LiabilityEntryComponent } from './liability-entry/liability-entry.component';
 import { NgrxFormsModule } from 'ngrx-forms';

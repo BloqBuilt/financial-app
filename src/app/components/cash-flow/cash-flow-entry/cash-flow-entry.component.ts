@@ -11,8 +11,9 @@ import {
   styleUrls: ['./cash-flow-entry.component.scss'],
 })
 export class CashFlowEntryComponent {
-  @Input() formState: FormGroupState<ICashFlowItem>;
-  private typeOptions: CashFlowTypeEnum[] = [
+  @Input()
+  formState: FormGroupState<ICashFlowItem>;
+  typeOptions: CashFlowTypeEnum[] = [
     CashFlowTypeEnum.Expense,
     CashFlowTypeEnum.Income,
   ];

@@ -7,10 +7,11 @@ import { Navigation, INavigation } from './models/navigation';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @HostBinding('class') classes = 'h-100';
+  @HostBinding('class')
+  classes = 'h-100';
 
-  private isMenuToggled = false;
-  private menuList: INavigation[] = [
+  isMenuToggled = false;
+  menuList: INavigation[] = [
     new Navigation('bar_chart', 'Summary', '/summary'),
     new Navigation('person', 'My Profile', '/profile'),
     new Navigation('work', 'Cash Flow', '/cash-flow'),

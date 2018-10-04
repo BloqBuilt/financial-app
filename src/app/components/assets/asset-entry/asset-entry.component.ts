@@ -14,8 +14,9 @@ import { FormGroupState } from 'ngrx-forms';
   styleUrls: ['./asset-entry.component.scss'],
 })
 export class AssetEntryComponent {
-  @Input() formState: FormGroupState<IAssetItem>;
-  private optionList: AssetTypeEnum[] = [
+  @Input()
+  formState: FormGroupState<IAssetItem>;
+  optionList: AssetTypeEnum[] = [
     AssetTypeEnum.Investment,
     AssetTypeEnum.RealEstate,
     AssetTypeEnum.RRSP,

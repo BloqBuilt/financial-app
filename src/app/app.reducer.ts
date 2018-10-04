@@ -9,6 +9,7 @@ import { liabilitiesReducer } from './components/liabilities/liabilities.reducer
 import { cashFlowReducer } from './components/cash-flow/cash-flow.reducer';
 import { assetsReducer } from './components/assets/assets.reducer';
 import { profileReducer } from './components/profile/profile.reducer';
+import { summaryReducer } from './components/summary/summary.reducer';
 
 // Effects
 export function logger(reducer: ActionReducer<{}>): any {
@@ -28,6 +29,7 @@ export function initializeStore() {
         cashFlow: cashFlowReducer,
         assets: assetsReducer,
         profile: profileReducer,
+        summary: summaryReducer,
       },
       { metaReducers },
     ),

@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { UiModule } from '../../ui/ui.module';
 import { MaterialModule } from '../../material';
 import { RouterModule } from '@angular/router';
-import { NgrxFormsModule } from 'ngrx-forms';
+import { EffectsModule } from '@ngrx/effects';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 import { SummaryComponent } from './summary.component';
+import { SummaryEffect } from './summary.effect';
+import { SummarySelectorService } from './summary.selector';
 
 const components = [SummaryComponent];
 
@@ -14,10 +16,10 @@ const components = [SummaryComponent];
     CommonModule,
     UiModule,
     MaterialModule,
-    NgrxFormsModule,
     RouterModule.forChild([{ path: '', component: SummaryComponent }]),
+    EffectsModule.forFeature([SummaryEffect]),
   ],
-  providers: [BaseHttpService],
+  providers: [BaseHttpService, SummarySelectorService],
   declarations: components,
   exports: components,
 })

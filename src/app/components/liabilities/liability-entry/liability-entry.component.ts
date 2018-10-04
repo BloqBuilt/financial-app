@@ -11,8 +11,9 @@ import { FormGroupState } from 'ngrx-forms';
   styleUrls: ['./liability-entry.component.scss'],
 })
 export class LiabilityEntryComponent {
-  @Input() formState: FormGroupState<ILiabilityItem>;
-  private optionList: LiabilityTypeEnum[] = [
+  @Input()
+  formState: FormGroupState<ILiabilityItem>;
+  optionList: LiabilityTypeEnum[] = [
     LiabilityTypeEnum.CreditCard,
     LiabilityTypeEnum.Loan,
     LiabilityTypeEnum.Mortgage,
