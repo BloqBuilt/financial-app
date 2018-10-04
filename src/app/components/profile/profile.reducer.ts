@@ -11,7 +11,7 @@ import {
 } from 'ngrx-forms';
 import { required, lessThan, greaterThan } from 'ngrx-forms/validation';
 import { IProfile } from './profile.model';
-import { GetProfileHttpReceiveAction } from './profile.action';
+import { GetProfileHttpResponseAction } from './profile.action';
 
 const FORM_ID = 'profile';
 
@@ -80,9 +80,9 @@ export function minAge(minAgeValue: number) {
 
 export const profileReducer = (_s: any, _a: any) =>
   combineReducers<any, any>({
-    formState(s = INITIAL_STATE, a: GetProfileHttpReceiveAction) {
+    formState(s = INITIAL_STATE, a: GetProfileHttpResponseAction) {
       switch (a.type) {
-        case GetProfileHttpReceiveAction.TYPE:
+        case GetProfileHttpResponseAction.TYPE:
           return createFormGroupState<IProfile>(FORM_ID, {
             name: a.payload.name,
             age: a.payload.age,

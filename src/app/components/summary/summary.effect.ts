@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 import {
   GetSummaryHttpRequestAction,
-  GetSummaryHttpReceiveAction,
+  GetSummaryHttpResponseAction,
   GetSummaryHttpErrorAction,
 } from './summary.action';
 
@@ -18,7 +18,7 @@ export class SummaryEffect {
   getProfile = this.actions$.ofType(GetSummaryHttpRequestAction.TYPE).pipe(
     mergeMap(() =>
       this.baseHttp.getData('summary').pipe(
-        map((res: Response) => new GetSummaryHttpReceiveAction(res.json())),
+        map((res: Response) => new GetSummaryHttpResponseAction(res.json())),
         catchError(() => of(new GetSummaryHttpErrorAction())),
       ),
     ),

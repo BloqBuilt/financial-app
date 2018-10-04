@@ -1,5 +1,5 @@
 import { ISummary } from './summary.model';
-import { GetSummaryHttpReceiveAction } from './summary.action';
+import { GetSummaryHttpResponseAction } from './summary.action';
 
 export const INITIAL_STATE: ISummary = {
   assets: null,
@@ -12,9 +12,12 @@ export const INITIAL_STATE: ISummary = {
   lifeExpectancy: null,
 };
 
-export const summaryReducer = (s: ISummary, a: GetSummaryHttpReceiveAction) => {
+export const summaryReducer = (
+  s: ISummary,
+  a: GetSummaryHttpResponseAction,
+) => {
   switch (a.type) {
-    case GetSummaryHttpReceiveAction.TYPE:
+    case GetSummaryHttpResponseAction.TYPE:
       return {
         assets: a.payload.assets,
         cashFlow: a.payload.cashFlow,

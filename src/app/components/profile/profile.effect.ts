@@ -3,7 +3,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Response } from '@angular/http';
 import {
   GetProfileHttpRequestAction,
-  GetProfileHttpReceiveAction,
+  GetProfileHttpResponseAction,
   GetProfileHttpErrorAction,
 } from './profile.action';
 import { mergeMap, map, catchError } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class ProfileEffect {
   getProfile = this.actions$.ofType(GetProfileHttpRequestAction.TYPE).pipe(
     mergeMap(() =>
       this.baseHttp.getData('profile').pipe(
-        map((res: Response) => new GetProfileHttpReceiveAction(res.json())),
+        map((res: Response) => new GetProfileHttpResponseAction(res.json())),
         catchError(() => of(new GetProfileHttpErrorAction())),
       ),
     ),
