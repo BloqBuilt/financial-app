@@ -12,7 +12,7 @@
     <ui-table-row-header [tableHeaders]="tableHeaders"
       (addItem)="addItem()"></ui-table-row-header>
     <ui-table-row class="w-100 flex"
-      *ngFor="let listItem of (assetList$ | async)?.controls; let even = even;"
+      *ngFor="let listItem of (assetList$ | async)?.controls; let i = index; trackBy: trackByIndex;"
       (deleteItem)="deleteItem(i)">
       <app-asset-entry class="flex items-center"
         [formState]="listItem">

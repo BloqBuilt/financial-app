@@ -7,9 +7,9 @@ export class GetProfileHttpRequestAction implements Action {
   constructor() {}
 }
 
-export class GetProfileHttpReceiveAction implements Action {
-  static TYPE = 'http/get-profile/receive';
-  readonly type = GetProfileHttpReceiveAction.TYPE;
+export class GetProfileHttpResponseAction implements Action {
+  static TYPE = 'http/get-profile/response';
+  readonly type = GetProfileHttpResponseAction.TYPE;
   constructor(public payload: IProfile) {}
 }
 

@@ -17,7 +17,8 @@ import { GetAssetsHttpRequestAction } from './assets.action';
   styleUrls: ['./assets.component.scss'],
 })
 export class AssetsComponent {
-  @HostBinding('class') classes = 'flex flex-column';
+  @HostBinding('class')
+  classes = 'flex flex-column';
 
   summaryLabels: string[] = [
     AssetTypeEnum.Investment,

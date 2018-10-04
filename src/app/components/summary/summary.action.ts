@@ -7,9 +7,9 @@ export class GetSummaryHttpRequestAction implements Action {
   constructor() {}
 }
 
-export class GetSummaryHttpReceiveAction implements Action {
-  static TYPE = 'http/get-summary/receive';
-  readonly type = GetSummaryHttpReceiveAction.TYPE;
+export class GetSummaryHttpResponseAction implements Action {
+  static TYPE = 'http/get-summary/response';
+  readonly type = GetSummaryHttpResponseAction.TYPE;
   constructor(public payload: ISummary) {}
 }
 
