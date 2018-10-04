@@ -48,11 +48,15 @@
         </div>
       </div>
     </div>
+  </ui-card>
+  <ui-card>
+    <ui-card-header>
+      Net Worth Progress
+    </ui-card-header>
     <div class="flex flex-column justify-center w-100 pa3">
-      <div>Net Worth Progress</div>
-      <ui-chart *ngIf="(summaryChartData$ | async) && (summaryChartLabels$ | async)"
+      <ui-chart *ngIf="(summaryChartDataSets$ | async) && (summaryChartLabels$ | async)"
         chartType="line"
-        [chartData]="summaryChartData$ | async"
+        [chartDataSets]="summaryChartDataSets$ | async"
         [chartLabels]="summaryChartLabels$ | async">
       </ui-chart>
     </div>

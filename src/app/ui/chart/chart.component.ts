@@ -6,10 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
-  @Input() chartData: Array<number[]> | number[] = [];
-  @Input() chartLabels: Array<any> = [];
-  @Input() chartType = 'pie';
-  @Input() chartColors: Array<any>;
+  @Input()
+  chartDataSets: Array<any> = [];
+  @Input()
+  chartLabels: Array<any> = [];
+  @Input()
+  chartType = 'line';
+  @Input()
+  chartColors: Array<any>;
 
   constructor() {}
 

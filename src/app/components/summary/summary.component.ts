@@ -20,8 +20,8 @@ export class SummaryComponent {
   yearInRetirement$: Observable<number> = this.summarySelectorService
     .yearsInRetirement$;
   netWorth$: Observable<number> = this.summarySelectorService.netWorth$;
-  summaryChartData$: Observable<number[]> = this.summarySelectorService
-    .summaryChartData$;
+  summaryChartDataSets$: Observable<any[]> = this.summarySelectorService
+    .summaryChartDataSets$;
   summaryChartLabels$: Observable<any[]> = this.summarySelectorService
     .summaryChartLabels$;
 

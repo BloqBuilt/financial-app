@@ -33,7 +33,7 @@ export const summaryChartLabelsSelector = (summary: ISummary) => {
   }
 };
 
-export const summaryChartDataSelector = (summary: ISummary) => {
+export const summaryChartDataSetsSelector = (summary: ISummary) => {
   const summaryChartLabels = summaryChartLabelsSelector(summary) || [];
   let summaryChartData = [];
   if (summary) {
@@ -41,11 +41,11 @@ export const summaryChartDataSelector = (summary: ISummary) => {
     for (let i = 0; i <= summaryChartLabels.length; i++) {
       let yearsCashFlow = summary.cashFlow * 12;
       let currentNetWorthValue;
-      if (summaryChartLabels[i] < summary.retirementAge) {
+      if (summaryChartLabels[i] <= summary.retirementAge) {
         currentNetWorthValue = lastNetWorthValue + yearsCashFlow;
       }
 
-      if (summaryChartLabels[i] >= summary.retirementAge) {
+      if (summaryChartLabels[i] > summary.retirementAge) {
         currentNetWorthValue = lastNetWorthValue - summary.expense;
       }
 
@@ -54,7 +54,12 @@ export const summaryChartDataSelector = (summary: ISummary) => {
       summaryChartData.push(currentNetWorthValue);
     }
   }
-  return summaryChartData;
+  return [
+    {
+      data: summaryChartData,
+      label: 'Net Worth',
+    },
+  ];
 };
 
 @Injectable()
@@ -73,9 +78,9 @@ export class SummarySelectorService {
 
   netWorth$ = this.store.select(summarySelector).pipe(map(netWorthSelector));
 
-  summaryChartData$ = this.store
+  summaryChartDataSets$ = this.store
     .select(summarySelector)
-    .pipe(map(summaryChartDataSelector));
+    .pipe(map(summaryChartDataSetsSelector));
 
   summaryChartLabels$ = this.store
     .select(summarySelector)

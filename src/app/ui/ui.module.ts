@@ -9,6 +9,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { CommonModule } from '@angular/common';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { PageScrollComponent } from './page-scroll/page-scroll.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 const components = [
   PageHeaderComponent,
@@ -16,6 +17,7 @@ const components = [
   CardComponent,
   CardHeaderComponent,
   ChartComponent,
+  PieChartComponent,
   TableRowComponent,
   TableRowHeaderComponent,
   SummaryComponent,
