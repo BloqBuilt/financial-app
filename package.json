@@ -1,6 +1,6 @@
 {
-  "name": "FinancialApp",
-  "version": "0.0.0",
+  "name": "FinancialCoachApp",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
