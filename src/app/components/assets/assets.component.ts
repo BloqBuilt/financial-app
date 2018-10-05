@@ -1,9 +1,5 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import {
-  IAssetItem,
-  AssetItem,
-  AssetTypeEnum,
-} from '../../components/assets/assets.model';
+import { Component, HostBinding } from '@angular/core';
+import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { ActionsSubject } from '@ngrx/store';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { Observable } from 'rxjs/Observable';

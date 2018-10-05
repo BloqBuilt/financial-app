@@ -8,7 +8,7 @@
         <div class="flex pv2 justify-between"
           *ngFor="let summaryLabel of summaryLabels; let i = index;">
           <div class="b">{{summaryLabel}}</div>
-          <div>{{summaryValues[i] | currency}}</div>
+          <div [ngClass]="{'gray': (summaryValues[i] || 0) === 0}">{{summaryValues[i] || 0 | currency}}</div>
         </div>
       </div>
     </div>

@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { IAssetsStore } from '../../components/assets/assets.reducer';
-import {
-  AbstractControlState,
-  FormArrayState,
-  FormGroupState,
-} from 'ngrx-forms';
+import { FormArrayState } from 'ngrx-forms';
 import {
   doesCollectionContainElements,
   getAmount,

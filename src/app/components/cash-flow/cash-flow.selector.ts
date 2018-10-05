@@ -11,7 +11,7 @@ import {
   getAmount,
   combine,
 } from '../../store/selectors/common.selector';
-import { FormArrayState, FormGroupState } from 'ngrx-forms';
+import { FormArrayState } from 'ngrx-forms';
 
 export const cashFlowFeatureSelector = createFeatureSelector<ICashFlowStore>(
   'cashFlow',
@@ -66,7 +66,7 @@ export const totalCashFlow = createSelector(
 const chartData = createSelector(
   incomeAmountSelector,
   expenseAmountSelector,
-  (incomeAmount, expenseAmount) => [incomeAmount, expenseAmount],
+  (incomeAmount, expenseAmount) => [incomeAmount || 0, expenseAmount || 0],
 );
 
 @Injectable()

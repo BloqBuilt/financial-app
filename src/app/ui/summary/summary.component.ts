@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
-  @Input() summaryLabels: string[] = [];
-  @Input() summaryValues: number[] = [];
+  @Input()
+  summaryLabels: string[] = [];
+  @Input()
+  summaryValues: number[] = [];
 }

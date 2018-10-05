@@ -54,12 +54,15 @@ export const summaryChartDataSetsSelector = (summary: ISummary) => {
       summaryChartData.push(currentNetWorthValue);
     }
   }
-  return [
-    {
-      data: summaryChartData,
-      label: 'Net Worth',
-    },
-  ];
+
+  if (summaryChartData.length > 0) {
+    return [
+      {
+        data: summaryChartData,
+        label: 'Net Worth',
+      },
+    ];
+  }
 };
 
 @Injectable()

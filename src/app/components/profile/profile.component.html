@@ -32,12 +32,14 @@
             [ngrxFormControlState]="(profileControls$ | async).lifeExpectancy">
         </mat-form-field>
       </div>
-      <div class="flex flex-column ph2 w-50">
-        <div class="flex items-center pv2">
+      <div class="flex flex-column pa3 w-50 b">
+        <div class="flex items-center justify-center pv2"
+          *ngIf="(yearToRetire$ | async) > 0">
           <div class="w-40">Years till Retirement</div>
           <div>{{ yearToRetire$ | async }}</div>
         </div>
-        <div class="flex items-center pv2">
+        <div class="flex items-center justify-center pv2"
+          *ngIf="(yearInRetirement$ | async) > 0">
           <div class="w-40">Years in Retirement</div>
           <div>{{ yearInRetirement$ | async }}</div>
         </div>

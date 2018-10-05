@@ -12,8 +12,15 @@ export const yearsTillRetirementSelector = profile => {
 };
 
 export const yearsInRetirementSelector = profile => {
-  if (profile.retirementAge.isValid && profile.lifeExpectancy.isValid) {
-    return profile.lifeExpectancy.value - profile.retirementAge.value;
+  if (
+    profile.retirementAge.isValid &&
+    profile.lifeExpectancy.isValid &&
+    profile.age.isValid
+  ) {
+    if (profile.retirementAge.value > profile.age.value) {
+      return profile.lifeExpectancy.value - profile.retirementAge.value;
+    }
+    return profile.lifeExpectancy.value - profile.age.value;
   }
 };
 

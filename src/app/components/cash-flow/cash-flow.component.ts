@@ -1,7 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
 import { ActionsSubject } from '@ngrx/store';
 import {
-  ICashFlowItem,
   CashFlowItem,
   CashFlowTypeEnum,
 } from '../../components/cash-flow/cash-flow.model';
@@ -17,7 +16,8 @@ import { GetCashFlowHttpRequestAction } from './cash-flow.action';
   styleUrls: ['./cash-flow.component.scss'],
 })
 export class CashFlowComponent {
-  @HostBinding('class') classes = 'flex flex-column';
+  @HostBinding('class')
+  classes = 'flex flex-column';
 
   summaryLabels: string[] = [
     CashFlowTypeEnum.Income,

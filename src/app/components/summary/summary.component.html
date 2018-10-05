@@ -6,7 +6,8 @@
     <ui-card-header>
       Summary Info
     </ui-card-header>
-    <div class="flex">
+    <div class="flex"
+      *ngIf="(summaryChartDataSets$ | async)">
       <div class="flex flex-column pa3 w-100">
         <div class="flex justify-between w-100 pv1">
           <div>Age</div>
@@ -48,6 +49,10 @@
         </div>
       </div>
     </div>
+    <div class="pa3 b"
+      *ngIf="(summaryChartDataSets$ | async) === undefined">
+      No Data - Please fill out other sections and then return.
+    </div>
   </ui-card>
   <ui-card>
     <ui-card-header>
@@ -59,6 +64,10 @@
         [chartDataSets]="summaryChartDataSets$ | async"
         [chartLabels]="summaryChartLabels$ | async">
       </ui-chart>
+      <div class="b"
+        *ngIf="!(summaryChartDataSets$ | async)">
+        No Data - Please fill out other sections and then return.
+      </div>
     </div>
   </ui-card>
 </ui-page-scroll>

@@ -18,3 +18,21 @@ export class GetProfileHttpErrorAction implements Action {
   readonly type = GetProfileHttpErrorAction.TYPE;
   constructor() {}
 }
+
+export class SaveProfileHttpRequestAction implements Action {
+  static TYPE = 'http/save-profile/request';
+  readonly type = SaveProfileHttpRequestAction.TYPE;
+  constructor(public payload: IProfile) {}
+}
+
+export class SaveProfileHttpResponseAction implements Action {
+  static TYPE = 'http/save-profile/response';
+  readonly type = SaveProfileHttpResponseAction.TYPE;
+  constructor(public payload: IProfile) {}
+}
+
+export class SaveProfileHttpErrorAction implements Action {
+  static TYPE = 'http/save-profile/error';
+  readonly type = SaveProfileHttpErrorAction.TYPE;
+  constructor() {}
+}

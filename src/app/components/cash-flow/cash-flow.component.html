@@ -19,6 +19,7 @@
         [formState]="listItem">
       </app-cash-flow-entry>
     </ui-table-row>
+    <ui-table-empty *ngIf="(cashFlowList$ | async)?.controls.length === 0"></ui-table-empty>
   </ui-card>
   <ui-card>
     <ui-card-header>

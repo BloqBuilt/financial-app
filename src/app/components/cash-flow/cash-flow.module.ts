@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { UiModule } from '../../ui/ui.module';
 import { MaterialModule } from '../../material';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
 import { NgrxFormsModule } from 'ngrx-forms';
 
 import { CashFlowComponent } from './cash-flow.component';

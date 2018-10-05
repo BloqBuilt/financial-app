@@ -5,7 +5,6 @@ import {
   LiabilityItem,
   LiabilityTypeEnum,
 } from '../../components/liabilities/liabilities.model';
-import { filter, map } from 'rxjs/operators';
 import { ILiabilityState } from '../../components/liabilities/liabilities.reducer';
 import { FormArrayState, FormGroupState } from 'ngrx-forms';
 import {
@@ -81,9 +80,9 @@ const chartData = createSelector(
   liabilitiesLoanAmountSelector,
   liabilitiesMortgageAmountSelector,
   (creditCardAmount, loanAmount, mortgageAmount) => [
-    creditCardAmount,
-    loanAmount,
-    mortgageAmount,
+    creditCardAmount || 0,
+    loanAmount || 0,
+    mortgageAmount || 0,
   ],
 );
 

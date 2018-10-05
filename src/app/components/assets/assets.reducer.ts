@@ -1,5 +1,5 @@
 import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
-import { combineReducers, Action } from '@ngrx/store';
+import { combineReducers } from '@ngrx/store';
 import {
   createFormGroupReducerWithUpdate,
   updateArray,
@@ -11,7 +11,6 @@ import {
   markAsPristine,
   markAsUnsubmitted,
   markAsSubmitted,
-  setErrors,
 } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 import {
