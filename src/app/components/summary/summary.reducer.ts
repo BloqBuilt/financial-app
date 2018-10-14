@@ -12,10 +12,7 @@ export const INITIAL_STATE: ISummary = {
   lifeExpectancy: null,
 };
 
-export const summaryReducer = (
-  s: ISummary,
-  a: GetSummaryHttpResponseAction,
-) => {
+export function summaryReducer(s: ISummary, a: GetSummaryHttpResponseAction) {
   switch (a.type) {
     case GetSummaryHttpResponseAction.TYPE:
       return {
@@ -30,4 +27,4 @@ export const summaryReducer = (
       };
   }
   return s;
-};
+}

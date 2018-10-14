@@ -25,7 +25,7 @@ import {
   SaveCashFlowHttpErrorAction,
   CashFlowHttpActions,
 } from './cash-flow.action';
-import R = require('ramda');
+import * as R from 'ramda';
 
 interface ICashFlowCollection {
   collection: CashFlowItem[];
@@ -99,8 +99,8 @@ const updateFormGroupAfterSave = (
     }),
   })(s);
 
-export const cashFlowReducer = (_s: any, _a: any) =>
-  combineReducers<any, any>({
+export function cashFlowReducer(_s: any, _a: any) {
+  return combineReducers<any, any>({
     formState(
       s: FormGroupState<ICashFlowCollection> = createFormState(),
       a:
@@ -151,3 +151,4 @@ export const cashFlowReducer = (_s: any, _a: any) =>
       }
     },
   })(_s, _a);
+}

@@ -18,7 +18,7 @@ import {
   SaveLiabilitiesHttpRequestAction,
   SaveLiabilitiesHttpResponseAction,
 } from './liabilities.action';
-import R = require('ramda');
+import * as R from 'ramda';
 
 export const FORM_ID = 'liabilities';
 
@@ -106,8 +106,8 @@ const updateFormGroupAfterSave = (
     }),
   })(s);
 
-export const liabilitiesReducer = (_s: any, _a: any) =>
-  combineReducers<any, any>({
+export function liabilitiesReducer(_s: any, _a: any) {
+  return combineReducers<any, any>({
     formState(s = createFormState(), a: GetLiabilitiesHttpResponseAction) {
       switch (a.type) {
         case GetLiabilitiesHttpResponseAction.TYPE:
@@ -122,3 +122,4 @@ export const liabilitiesReducer = (_s: any, _a: any) =>
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);
+}

@@ -25,11 +25,11 @@ export function initializeStore() {
   return [
     StoreModule.forRoot(
       {
+        summary: summaryReducer,
         liabilities: liabilitiesReducer,
         cashFlow: cashFlowReducer,
         assets: assetsReducer,
         profile: profileReducer,
-        summary: summaryReducer,
       },
       { metaReducers },
     ),

@@ -18,7 +18,7 @@ import {
   SaveAssetsHttpRequestAction,
   SaveAssetsHttpResponseAction,
 } from './assets.action';
-import R = require('ramda');
+import * as R from 'ramda';
 
 export const FORM_ID = 'assets';
 
@@ -42,7 +42,7 @@ function isNameUniqueValidator(isNameUnique: boolean) {
   };
 }
 
-export const createFormState = (collection: AssetItem[] = []) =>
+const createFormState = (collection: AssetItem[] = []) =>
   createFormGroupState<IAssetsCollection>(FORM_ID, {
     collection,
   });
@@ -106,8 +106,8 @@ const updateFormGroupAfterSave = (
     }),
   })(s);
 
-export const assetsReducer = (_s: any, _a: any) =>
-  combineReducers<any, any>({
+export function assetsReducer(_s: any, _a: any) {
+  return combineReducers<any, any>({
     formState(s = createFormState(), a: GetAssetsHttpResponseAction) {
       switch (a.type) {
         case GetAssetsHttpResponseAction.TYPE:
@@ -120,3 +120,4 @@ export const assetsReducer = (_s: any, _a: any) =>
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);
+}

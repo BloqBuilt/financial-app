@@ -78,8 +78,8 @@ export function minAge(minAgeValue: number) {
   };
 }
 
-export const profileReducer = (_s: any, _a: any) =>
-  combineReducers<any, any>({
+export function profileReducer(_s: any, _a: any) {
+  return combineReducers<any, any>({
     formState(s = INITIAL_STATE, a: GetProfileHttpResponseAction) {
       switch (a.type) {
         case GetProfileHttpResponseAction.TYPE:
@@ -93,3 +93,4 @@ export const profileReducer = (_s: any, _a: any) =>
       return validationFormGroupReducer(s, a);
     },
   })(_s, _a);
+}
