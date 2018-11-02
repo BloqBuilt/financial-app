@@ -17,9 +17,8 @@ import {
   SaveLiabilitiesHttpResponseAction,
   SaveLiabilitiesHttpErrorAction,
 } from './liabilities.action';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { Action, ActionsSubject } from '@ngrx/store';
-import { of } from 'rxjs/observable/of';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 @Injectable()

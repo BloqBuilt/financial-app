@@ -9,7 +9,7 @@ import {
 import { Actions, Effect } from '@ngrx/effects';
 import { Response } from '@angular/http';
 import { CashFlowSelectorService } from './cash-flow.selector';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { Action, ActionsSubject } from '@ngrx/store';
 import {
   GetCashFlowHttpRequestAction,
@@ -19,7 +19,6 @@ import {
   SaveCashFlowHttpResponseAction,
   SaveCashFlowHttpErrorAction,
 } from './cash-flow.action';
-import { of } from 'rxjs/observable/of';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 @Injectable()

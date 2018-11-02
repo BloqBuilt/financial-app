@@ -1,7 +1,7 @@
 import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { combineReducers } from '@ngrx/store';
 import {
-  createFormGroupReducerWithUpdate,
+  createFormStateReducerWithUpdate,
   updateArray,
   updateGroup,
   validate,
@@ -47,7 +47,7 @@ const createFormState = (collection: AssetItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormGroupReducerWithUpdate<
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
   IAssetsCollection
 >({
   collection: updateArray<AssetItem>((tableRow, collection) => {
@@ -59,10 +59,10 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<
       ) === undefined;
 
     return updateGroup<AssetItem>({
-      name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
+      name: validate<string>(required, isNameUniqueValidator(isNameUnique)),
       amount: validate<number>(required),
       financialType: validate<AssetTypeEnum>(required),
-    })(tableRow);
+    });
   }),
 });
 

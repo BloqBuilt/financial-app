@@ -2,8 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { AssetItem, AssetTypeEnum } from '../../components/assets/assets.model';
 import { ActionsSubject } from '@ngrx/store';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
-import { Observable } from 'rxjs/Observable';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Observable, combineLatest } from 'rxjs';
 import { AssetsSelectorService } from './assets.selector';
 import { GetAssetsHttpRequestAction } from './assets.action';
 

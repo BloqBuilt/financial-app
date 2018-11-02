@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ActionsSubject } from '@ngrx/store';
 import { GetSummaryHttpRequestAction } from './summary.action';
 import { SummarySelectorService } from './summary.selector';

@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ProfileSelectorService } from './profile.selector';
 import { IProfile } from './profile.model';
 import { ActionsSubject } from '@ngrx/store';

@@ -7,7 +7,7 @@ import {
   GetProfileHttpErrorAction,
 } from './profile.action';
 import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 @Injectable()

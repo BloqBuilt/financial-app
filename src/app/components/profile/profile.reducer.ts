@@ -1,7 +1,7 @@
 import { combineReducers } from '@ngrx/store';
 import {
   createFormGroupState,
-  createFormGroupReducerWithUpdate,
+  createFormStateReducerWithUpdate,
   validate,
   AbstractControlState,
   FormGroupState,
@@ -22,7 +22,7 @@ export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
   lifeExpectancy: null,
 });
 
-const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
+const validationFormGroupReducer = createFormStateReducerWithUpdate<IProfile>({
   name: validate<string>(required),
   age: validate<number>([required, greaterThan(0), lessThan(120)]),
   retirementAge: (
@@ -30,7 +30,7 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
     rootForm: FormGroupState<IProfile>,
   ) => {
     if (rootForm.value.lifeExpectancy < 10) {
-      return disable(setValue(20, retirementAge));
+      return disable(setValue(20)(retirementAge));
     } else {
       return enable(
         validate<number>([required, greaterThan(0), lessThan(120)])(
@@ -43,15 +43,12 @@ const validationFormGroupReducer = createFormGroupReducerWithUpdate<IProfile>({
     lifeExpectancy: AbstractControlState<number>,
     rootForm: FormGroupState<IProfile>,
   ) =>
-    validate<number>(
-      [
-        required,
-        greaterThan(0),
-        lessThan(120),
-        minAge(rootForm.controls.retirementAge.value || null),
-      ],
-      lifeExpectancy,
-    ),
+    validate<number>(lifeExpectancy, [
+      required,
+      greaterThan(0),
+      lessThan(120),
+      minAge(rootForm.controls.retirementAge.value || null),
+    ]),
 });
 
 export function maxAge(maxAgeValue: number) {

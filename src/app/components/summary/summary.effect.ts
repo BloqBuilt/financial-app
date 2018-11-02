@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Response } from '@angular/http';
 import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 import {
   GetSummaryHttpRequestAction,

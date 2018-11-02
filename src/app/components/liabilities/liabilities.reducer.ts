@@ -1,6 +1,6 @@
 import {
   createFormGroupState,
-  createFormGroupReducerWithUpdate,
+  createFormStateReducerWithUpdate,
   validate,
   updateArray,
   updateGroup,
@@ -35,7 +35,7 @@ export const createFormState = (collection: LiabilityItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormGroupReducerWithUpdate<
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
   ILiabilityCollection
 >({
   collection: updateArray<LiabilityItem>((tableRow, collection) => {

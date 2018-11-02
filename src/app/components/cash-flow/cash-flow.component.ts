@@ -5,9 +5,8 @@ import {
   CashFlowTypeEnum,
 } from '../../components/cash-flow/cash-flow.model';
 import { CashFlowSelectorService } from '../../components/cash-flow/cash-flow.selector';
-import { Observable } from 'rxjs/Observable';
+import { Observable, combineLatest } from 'rxjs';
 import { RemoveArrayControlAction, AddArrayControlAction } from 'ngrx-forms';
-import { combineLatest } from 'rxjs/observable/combineLatest';
 import { GetCashFlowHttpRequestAction } from './cash-flow.action';
 
 @Component({

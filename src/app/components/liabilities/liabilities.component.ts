@@ -4,10 +4,9 @@ import {
   LiabilityTypeEnum,
 } from '../../components/liabilities/liabilities.model';
 import { ActionsSubject } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, combineLatest } from 'rxjs';
 import { AddArrayControlAction, RemoveArrayControlAction } from 'ngrx-forms';
 import { LiabilitiesSelectorService } from '../../components/liabilities/liabilities.selector';
-import { combineLatest } from 'rxjs/observable/combineLatest';
 import { GetLiabilitiesHttpRequestAction } from './liabilities.action';
 
 @Component({

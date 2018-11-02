@@ -9,9 +9,8 @@ import {
 import { Actions, Effect } from '@ngrx/effects';
 import { Http, Response } from '@angular/http';
 import { AssetsSelectorService } from './assets.selector';
-import { Observable } from 'rxjs/Observable';
 import { Action, ActionsSubject } from '@ngrx/store';
-import { of } from 'rxjs/observable/of';
+import { of, Observable } from 'rxjs';
 import {
   SaveAssetsHttpRequestAction,
   SaveAssetsHttpResponseAction,
@@ -20,7 +19,6 @@ import {
   GetAssetsHttpResponseAction,
   GetAssetsHttpErrorAction,
 } from './assets.action';
-import { IAssetItem } from './assets.model';
 import { BaseHttpService } from '../../api/base-http/base-http.service';
 
 @Injectable()

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {
-  MAT_PLACEHOLDER_GLOBAL_OPTIONS,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -33,10 +32,7 @@ import { NgrxMatSelectValueAccessor } from './mat-select-value-accessor';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  declarations: [
-    NgrxMatSelectValueAccessor,
-    CustomErrorStateMatcherDirective,
-  ],
+  declarations: [NgrxMatSelectValueAccessor, CustomErrorStateMatcherDirective],
   exports: [
     MatInputModule,
     MatCheckboxModule,
@@ -53,8 +49,5 @@ import { NgrxMatSelectValueAccessor } from './mat-select-value-accessor';
     NgrxMatSelectValueAccessor,
     CustomErrorStateMatcherDirective,
   ],
-  providers: [
-    { provide: MAT_PLACEHOLDER_GLOBAL_OPTIONS, useValue: { float: 'always' } }
-  ]
 })
-export class MaterialModule { }
+export class MaterialModule {}

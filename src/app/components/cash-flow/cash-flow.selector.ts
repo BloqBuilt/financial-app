@@ -4,7 +4,7 @@ import {
   CashFlowItem,
   CashFlowTypeEnum,
 } from '../../components/cash-flow/cash-flow.model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ICashFlowStore } from '../../components/cash-flow/cash-flow.reducer';
 import {
   doesCollectionContainElements,

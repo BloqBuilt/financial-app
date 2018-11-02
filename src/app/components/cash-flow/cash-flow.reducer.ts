@@ -1,6 +1,6 @@
 import {
   createFormGroupState,
-  createFormGroupReducerWithUpdate,
+  createFormStateReducerWithUpdate,
   validate,
   updateArray,
   updateGroup,
@@ -46,7 +46,7 @@ export const createFormState = (collection: CashFlowItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormGroupReducerWithUpdate<
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
   ICashFlowCollection
 >({
   collection: updateArray<CashFlowItem>(
