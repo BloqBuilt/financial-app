@@ -35,9 +35,7 @@ export const createFormState = (collection: LiabilityItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormStateReducerWithUpdate<
-  ILiabilityCollection
->({
+const updateFormState = updateGroup<ILiabilityCollection>({
   collection: updateArray<LiabilityItem>((tableRow, collection) => {
     const isNameUnique =
       collection.value.find(
@@ -53,6 +51,10 @@ const validationFormGroupReducer = createFormStateReducerWithUpdate<
     })(tableRow);
   }),
 });
+
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
+  ILiabilityCollection
+>(updateFormState);
 
 function isNameUniqueValidator(isNameUnique: boolean) {
   return (value: string) => {

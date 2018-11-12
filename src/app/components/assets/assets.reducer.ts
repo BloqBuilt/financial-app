@@ -47,9 +47,7 @@ const createFormState = (collection: AssetItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormStateReducerWithUpdate<
-  IAssetsCollection
->({
+const updateFormState = updateGroup<IAssetsCollection>({
   collection: updateArray<AssetItem>((tableRow, collection) => {
     const isNameUnique =
       collection.value.find(
@@ -59,12 +57,16 @@ const validationFormGroupReducer = createFormStateReducerWithUpdate<
       ) === undefined;
 
     return updateGroup<AssetItem>({
-      name: validate<string>(required, isNameUniqueValidator(isNameUnique)),
+      name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
       amount: validate<number>(required),
       financialType: validate<AssetTypeEnum>(required),
-    });
+    })(tableRow);
   }),
 });
+
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
+  IAssetsCollection
+>(updateFormState);
 
 const updateFormGroupBeforeSave = (
   s: FormGroupState<IAssetsCollection>,

@@ -13,10 +13,10 @@ export interface ICashFlowItem {
 }
 
 export class CashFlowItem implements ICashFlowItem {
-  id: number;
-  name: string;
-  amount: number;
-  financialType: CashFlowTypeEnum;
+  public id: number;
+  public name: string;
+  public amount: number;
+  public financialType: CashFlowTypeEnum;
   constructor(item: ICashFlowItem, public uiGuid: string = createGuid()) {
     this.id = item.id;
     this.name = item.name;

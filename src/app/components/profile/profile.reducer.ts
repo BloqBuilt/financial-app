@@ -8,6 +8,7 @@ import {
   disable,
   setValue,
   enable,
+  updateGroup,
 } from 'ngrx-forms';
 import { required, lessThan, greaterThan } from 'ngrx-forms/validation';
 import { IProfile } from './profile.model';
@@ -22,7 +23,7 @@ export const INITIAL_STATE = createFormGroupState<IProfile>(FORM_ID, {
   lifeExpectancy: null,
 });
 
-const validationFormGroupReducer = createFormStateReducerWithUpdate<IProfile>({
+const updateFormState = updateGroup<IProfile>({
   name: validate<string>(required),
   age: validate<number>([required, greaterThan(0), lessThan(120)]),
   retirementAge: (
@@ -50,6 +51,10 @@ const validationFormGroupReducer = createFormStateReducerWithUpdate<IProfile>({
       minAge(rootForm.controls.retirementAge.value || null),
     ]),
 });
+
+const validationFormGroupReducer = createFormStateReducerWithUpdate<IProfile>(
+  updateFormState,
+);
 
 export function maxAge(maxAgeValue: number) {
   return (value: number) => {

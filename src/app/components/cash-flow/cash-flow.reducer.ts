@@ -46,17 +46,19 @@ export const createFormState = (collection: CashFlowItem[] = []) =>
     collection,
   });
 
-const validationFormGroupReducer = createFormStateReducerWithUpdate<
-  ICashFlowCollection
->({
-  collection: updateArray<CashFlowItem>(
-    updateGroup<CashFlowItem>({
+const updateFormState = updateGroup<ICashFlowCollection>({
+  collection: updateArray<CashFlowItem>((tableRow, collection) => {
+    return updateGroup<CashFlowItem>({
       name: validate<string>(required),
       amount: validate<number>(required),
       financialType: validate<CashFlowTypeEnum>(required),
-    }),
-  ),
+    })(tableRow);
+  }),
 });
+
+const validationFormGroupReducer = createFormStateReducerWithUpdate<
+  ICashFlowCollection
+>(updateFormState);
 
 const updateFormGroupBeforeSave = (
   s: FormGroupState<ICashFlowCollection>,

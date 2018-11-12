@@ -15,11 +15,11 @@ export interface ILiabilityItem {
 }
 
 export class LiabilityItem implements ILiabilityItem {
-  id: number;
-  name: string;
-  amount: number;
-  minimumPayment: number;
-  financialType: LiabilityTypeEnum;
+  public id: number;
+  public name: string;
+  public amount: number;
+  public minimumPayment: number;
+  public financialType: LiabilityTypeEnum;
   constructor(item: ILiabilityItem, public uiGuid: string = createGuid()) {
     this.id = item.id;
     this.name = item.name;
