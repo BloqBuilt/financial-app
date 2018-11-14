@@ -10,8 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "nodemon",
-    "postinstall": "ng build --aot -prod"
+    "server": "nodemon"
   },
   "private": true,
   "dependencies": {
