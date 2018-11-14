@@ -45,9 +45,9 @@ const updateFormState = updateGroup<ILiabilityCollection>({
       ) === undefined;
 
     return updateGroup<LiabilityItem>({
-      name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
-      amount: validate<number>(required),
-      minimumPayment: validate<number>(required),
+      // name: validate<string>([required, isNameUniqueValidator(isNameUnique)]),
+      // amount: validate<number>(required),
+      // minimumPayment: validate<number>(required),
     })(tableRow);
   }),
 });

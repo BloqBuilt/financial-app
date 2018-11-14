@@ -47,11 +47,11 @@ export const createFormState = (collection: CashFlowItem[] = []) =>
   });
 
 const updateFormState = updateGroup<ICashFlowCollection>({
-  collection: updateArray<CashFlowItem>((tableRow, collection) => {
+  collection: updateArray<CashFlowItem>(tableRow => {
     return updateGroup<CashFlowItem>({
-      name: validate<string>(required),
-      amount: validate<number>(required),
-      financialType: validate<CashFlowTypeEnum>(required),
+      // name: validate<string>(required),
+      // amount: validate<number>(required),
+      // financialType: validate<CashFlowTypeEnum>(required),
     })(tableRow);
   }),
 });
