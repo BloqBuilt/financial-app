@@ -4,7 +4,6 @@ import {
   AssetItem,
   AssetTypeEnum,
 } from '../../../components/assets/assets.model';
-import * as _ from 'lodash';
 import { FormGroupState } from 'ngrx-forms';
 
 @Component({
