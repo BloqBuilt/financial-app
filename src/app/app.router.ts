@@ -27,4 +27,8 @@ export const routes: Routes = [
     loadChildren:
       './components/liabilities/liabilities.module#LiabilitiesModule',
   },
+  {
+    path: 'schedule',
+    loadChildren: './components/schedule/schedule.module#ScheduleModule',
+  },
 ];

@@ -11,6 +11,7 @@ import { CardHeaderComponent } from './card-header/card-header.component';
 import { PageScrollComponent } from './page-scroll/page-scroll.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { TableEmptyComponent } from './table-empty/table-empty.component';
+import { MaterialModule } from '../material';
 
 const components = [
   PageHeaderComponent,
@@ -26,8 +27,8 @@ const components = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ChartsModule],
+  imports: [MaterialModule, CommonModule, ChartsModule],
   declarations: components,
-  exports: components,
+  exports: [CommonModule, components, MaterialModule],
 })
 export class UiModule {}

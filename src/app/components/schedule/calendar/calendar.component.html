@@ -1,0 +1,20 @@
+<ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+<div class="pa1 flex flex-column">
+  <div class="flex flex-row"
+    *ngFor="let week of days | weekChunker">
+    <div class="day pa1 ba b-black"
+      *ngFor="let day of week">
+      {{day.date}}
+      <ng-template *ngIf="day.isOffDay"
+        ngFor
+        let-item
+        [ngForOf]="[day]"
+        [ngForTemplate]="offDayTemplate"></ng-template>
+      <ng-template *ngIf="!day.isOffDay"
+        ngFor
+        let-item
+        [ngForOf]="[day]"
+        [ngForTemplate]="onDayTemplate"></ng-template>
+    </div>
+  </div>
+</div>

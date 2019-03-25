@@ -1,0 +1,27 @@
+<ui-page-header>
+  Schedule
+</ui-page-header>
+<ui-page-scroll>
+  <ui-card>
+    <ui-card-header>
+      Schedule Info
+    </ui-card-header>
+    <app-calendar>
+      <ng-template #headerTemplate>
+        <div>Header</div>
+      </ng-template>
+      <ng-template #offDayTemplate
+        let-day>
+        <div>Off Day {{day.date}}</div>
+        <button (click)="editDay(day)">Edit Day</button>
+      </ng-template>
+      <ng-template #onDayTemplate
+        let-day>
+        <div>On Day</div>
+      </ng-template>
+
+    </app-calendar>
+  </ui-card>
+</ui-page-scroll>
+
+<!-- App Calendar Templates -->

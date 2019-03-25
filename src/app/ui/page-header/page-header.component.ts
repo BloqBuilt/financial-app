@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ui-page-header',
   templateUrl: './page-header.component.html',
 })
-export class PageHeaderComponent {
-}
+export class PageHeaderComponent {}

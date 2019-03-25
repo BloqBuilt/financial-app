@@ -17,6 +17,7 @@ export class AppComponent {
     new Navigation('work', 'Cash Flow', '/cash-flow'),
     new Navigation('trending_up', 'Assets', '/assets'),
     new Navigation('payment', 'Liabilities', '/liabilities'),
+    new Navigation('event_note', 'Schedule', '/schedule'),
   ];
 
   constructor() {}

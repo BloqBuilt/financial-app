@@ -4,6 +4,7 @@ import { ActionsSubject } from '@ngrx/store';
 import { GetSummaryHttpRequestAction } from './summary.action';
 import { SummarySelectorService } from './summary.selector';
 import { ISummary } from './summary.model';
+import { HelperServiceService } from '../../common-service/helper-service/helper-service.service';
 
 @Component({
   selector: 'app-summary',
